@@ -1,0 +1,46 @@
+@(error: Integer)
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+    <!-- Bootstrap -->
+  <link href="@routes.Assets.at("css/bootstrap.css")" rel="stylesheet">
+
+    <title>Inicio de Sesion: HelpDesk BCP</title>
+    </head>
+    <body>
+      <div class="container" align="center" style="width: 50%">
+        <h4>Bienvenido a la aplicacion de Caradvisor</h4>
+        <div class="container" align="center" style="width: 50%">
+          <img class="img-responsive" src="../assets/logo.png">
+        </div>
+
+        <form id="formulario" method="POST" action="@routes.Application.ValidaciondeUsuario()">
+          <div class="form-group">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" class="form-control" name="username" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-default">Inicio de Sesion</button>
+        </form>
+
+        @if(error == 1){
+          <p>&nbsp;</p>
+          <div class="alert alert-danger" role="alert" style="width : 50%; height: 70%">
+            <h3>Su clave es incorrecta</h3>
+          </div>
+        }
+    </div>
+
+</body>
+
+    <!-- Bootstrap core JavaScript
+   ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+  <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+</html>
