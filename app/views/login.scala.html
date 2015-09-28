@@ -2,45 +2,77 @@
 
 <!DOCTYPE html>
 <html>
-<head lang="en">
-  <meta charset="UTF-8">
-    <!-- Bootstrap -->
-  <link href="@routes.Assets.at("css/bootstrap.css")" rel="stylesheet">
+    <head lang="en">
 
-    <title>Inicio de Sesion: Caradvisor</title>
+        <link rel="import" href="footer" id="pie">
+        <link rel="import" href="header" id="cabeza">
+
+
+        <title>Inicio de Sesion: Caradvisor</title>
+        <meta charset="UTF-8">
+            <!-- Bootstrap -->
+        <link href="@routes.Assets.at("css/bootstrap.min.css")" rel="stylesheet">
+            <!-- Bootstrap theme -->
+        <link href="@routes.Assets.at("css/bootstrap-theme.css")" rel="stylesheet">
+            <!-- Custom styles for this template -->
+        <link href="@routes.Assets.at("css/signin.css")" rel="stylesheet">
     </head>
-    <body>
-      <div class="container" align="center" style="width: 50%">
-        <h4>Bienvenido a la aplicacion de Caradvisor</h4>
-        <div class="container" align="center" style="width: 50%">
-          <img class="img-responsive" src="../assets/logo.png">
+    <body background="../assets/wallpaperweb.jpg" style="background-size: auto">
+
+        <div id="header"></div>
+
+        <div class="container" style="margin-top : 5%">
+
+            <div class="container" align="center" >
+                <img class="img-responsive" style="margin-left : -2%" src="../assets/logo.png">
+            </div>
+
+            <form class="form-signin" id="formulario" method="POST"
+            action="@routes.Application.ValidaciondeUsuario()">
+                @if(error == 1) {
+
+                    <p>&nbsp;</p>
+                    <div class="alert alert-danger" role="alert">
+                        <h4>Usuario y/o clave incorrectas</h4>
+                    </div>
+                }
+                <div class="form-group">
+                    @*<label for="username">Nombre de usuario</label>*@
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    @*<label for="password">Password</label>*@
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button class="btn btn-lg btn-danger btn-block" type="submit">Iniciar Sesion
+                </button>
+
+
+            </form>
         </div>
 
-        <form id="formulario" method="POST" action="@routes.Application.ValidaciondeUsuario()">
-          <div class="form-group">
-            <label for="username">Nombre de usuario</label>
-            <input type="text" class="form-control" name="username" placeholder="Username">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-default">Inicio de Sesion</button>
-        </form>
+        <div class="footer" id="footer"></div>
 
-        @if(error == 1){
-          <p>&nbsp;</p>
-          <div class="alert alert-danger" role="alert" style="width : 50%; height: 70%">
-            <h3>Su clave es incorrecta</h3>
-          </div>
-        }
-    </div>
 
-</body>
 
-    <!-- Bootstrap core JavaScript
+            <!-- Bootstrap core JavaScript
    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
-  <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+
+        <script>
+          var link = document.getElementById('pie');
+          var template = link.import.querySelector('template');
+          var clone = document.importNode(template.content, true);
+          document.querySelector('#footer').appendChild(clone);
+
+           var link2 = document.getElementById('cabeza');
+          var template2 = link2.import.querySelector('template');
+          var clone2 = document.importNode(template2.content, true);
+          document.querySelector('#header').appendChild(clone2);
+         </script>
+
+
+            <!-- Placed at the end of the document so the pages load faster -->
+        <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+        <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+    </body>
 </html>

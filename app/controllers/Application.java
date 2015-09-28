@@ -1,12 +1,16 @@
 package controllers;
 
 //import play.*; //esto se usa para el lenguaje Scala
+
 import controllers.DAO.DAOUser;
 import models.User;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.mvc.*;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.footer;
+import views.html.header;
+import views.html.login;
 
 public class Application extends Controller {
 
@@ -15,6 +19,15 @@ public class Application extends Controller {
     public static Result principal() {
         return ok(login.render(0));
     }
+
+    public static Result footer() {
+        return ok(footer.render());
+    }
+
+    public static Result header() {
+        return ok(header.render());
+    }
+
 
     //Generando el metodo de validacion de usuario
     public static Result ValidaciondeUsuario()

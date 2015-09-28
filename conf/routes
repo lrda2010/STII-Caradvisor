@@ -4,7 +4,11 @@
 
 # Home page
 GET         /                    controllers.Application.principal()
-POST        /respuesta/          controllers.Application.ValidaciondeUsuario()
+POST        /          controllers.Application.ValidaciondeUsuario()
+
+#Templates
+GET         /header            controllers.Application.header()
+GET         /footer              controllers.Application.footer()
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
