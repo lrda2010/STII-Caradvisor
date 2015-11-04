@@ -83,7 +83,7 @@ public class DAOUser implements IFUser {
         try {
             String sql = "SELECT * FROM vehiculo WHERE FK_ID_Propietario=?";
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, usuario.getID_Usuario_foro());
+            pstmt.setString(1, usuario.getUsername());
 
             rs = pstmt.executeQuery();
 

@@ -22,11 +22,11 @@ public class Application extends Controller {
         return ok(login.render(0));
     }
 
-    public static Result footer() {
+    public static Result pie() {
         return ok(footer.render());
     }
 
-    public static Result header() {
+    public static Result cabecera() {
         return ok(header.render());
     }
 

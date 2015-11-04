@@ -8,8 +8,8 @@ POST        /          controllers.Application.ValidaciondeUsuario()
 
 
 #Templates
-GET         /header            controllers.Application.header()
-GET         /footer              controllers.Application.footer()
+GET         /header              controllers.Application.cabecera()
+GET         /footer              controllers.Application.pie()
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
