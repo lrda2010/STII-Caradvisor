@@ -6,6 +6,7 @@
 GET         /                    controllers.Application.principal()
 POST        /          controllers.Application.ValidaciondeUsuario()
 
+
 #Templates
 GET         /header            controllers.Application.header()
 GET         /footer              controllers.Application.footer()

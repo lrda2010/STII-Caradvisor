@@ -1,6 +1,7 @@
 package controllers.DAO;
 
 import models.User;
+import models.Vehiculo;
 
 import java.sql.Connection;
 
@@ -11,5 +12,6 @@ public interface IFUser {
 
     Connection getConnection();
     User validarBD(String user, String password);
+    Vehiculo existeVehiculos(User usuario);
 
 }

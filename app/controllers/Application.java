@@ -4,12 +4,14 @@ package controllers;
 
 import controllers.DAO.DAOUser;
 import models.User;
+import models.Vehiculo;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.footer;
 import views.html.header;
+import views.html.intro;
 import views.html.login;
 
 public class Application extends Controller {
@@ -41,12 +43,20 @@ public class Application extends Controller {
         User result = db.validarBD(username,password);
 
         if (result!= null) {
-            return redirect("http://www.google.com.pe");
+
+            Vehiculo veh = db.existeVehiculos(result);
+
+            if(veh == null){
+                return ok(intro.render(0));}
+            else{
+                return ok(intro.render(1));
+            }
+
         }else{
             return ok(login.render(1));
         }
-    }
 
+    }
 
 
     public static Result LogOut(){
