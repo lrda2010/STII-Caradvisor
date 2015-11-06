@@ -4,6 +4,8 @@ import models.Vehiculo;
 import play.db.*;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -72,10 +74,10 @@ public class DAOUser implements IFUser {
     }
 
     @Override
-    public Vehiculo existeVehiculos(User usuario) {
+    public List listaVehiculos(User usuario) {
 
         Connection con = getConnection();
-        Vehiculo resultado = null;
+        List<Vehiculo> resultado = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
 
@@ -92,7 +94,8 @@ public class DAOUser implements IFUser {
         }
 
         try {
-            if (rs.next()) {
+            while (rs.next()) {
+
                 Vehiculo veh = new Vehiculo(
                         rs.getString(1),
                         rs.getString(2),
@@ -102,11 +105,11 @@ public class DAOUser implements IFUser {
                         rs.getString(6),
                         rs.getString(7));
 
-                resultado = veh;
+                resultado.add(veh);
+
 
             }
-            else
-                resultado = null;
+
 
         } catch (SQLException e) {
             e.printStackTrace();

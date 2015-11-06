@@ -1,4 +1,4 @@
-@(id: Integer)
+@(id: Integer, vehiculos: java.util.List[Vehiculo])
 
 <!DOCTYPE html>
 <html>
@@ -28,8 +28,38 @@
             <div class="panel panel-default">
                 <div class="panel-heading " >Lista de vehiculos registrados</div>
                 <div class="panel-body">
-                    Cuenta con vehiculos registrados
-                    <p>
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>A&ntilde;o</th>
+                                <th>Color</th>
+                                <th>Caracteristicas</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                    @for(vehiculo <- vehiculos) {
+                        <tr>
+                        <th>@vehiculo.getID_vehiculo</th>
+                        <td>@vehiculo.getMarca</td>
+                        <td>@vehiculo.getModelo</td>
+                        <td>@vehiculo.getYear</td>
+                        <td>@vehiculo.getColor</td>
+                        <td>@vehiculo.getCaracteristicas</td>
+                        </tr>
+                    }
+                        </tbody>
+
+
+                    </table>
+                        <p>
                         <button type="button" class="btn btn-danger" style="margin-top : 1%">
                             Agregar Vehiculo</button>
                     </p>

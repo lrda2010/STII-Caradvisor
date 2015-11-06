@@ -14,6 +14,9 @@ import views.html.header;
 import views.html.intro;
 import views.html.login;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application extends Controller {
 
     static DAOUser db = new DAOUser();
@@ -44,12 +47,12 @@ public class Application extends Controller {
 
         if (result!= null) {
 
-            Vehiculo veh = db.existeVehiculos(result);
+            List<Vehiculo> veh = db.listaVehiculos(result);
 
             if(veh == null){
-                return ok(intro.render(0));}
+                return ok(intro.render(0, null));}
             else{
-                return ok(intro.render(1));
+                return ok(intro.render(1, veh));
             }
 
         }else{
