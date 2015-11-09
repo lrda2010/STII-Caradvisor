@@ -21,6 +21,7 @@ public interface IFUser {
     List<Proveedor> listaMecanicosTop();
     Integer devolverIdMantenimiento(String marca, String modelo);
     List<Mantenimiento> devolverMantenimiento(Integer id, Integer kilometraje);
+    void AgregarVehiculo(Vehiculo_Usuario veh);
 
 }
 

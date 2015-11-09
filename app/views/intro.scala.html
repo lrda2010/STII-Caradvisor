@@ -45,7 +45,8 @@
                                 <th>Modelo</th>
                                 <th>A&ntilde;o</th>
                                 <th>Color</th>
-                                <th>Kilometraje</th>
+                                <th>KM</th>
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -60,6 +61,10 @@
                         <td>@vehiculo.getYear</td>
                         <td>@vehiculo.getColor</td>
                         <td>@vehiculo.getKilometraje</td>
+                        <td><button type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-chevron-right"
+                            aria-hidden="true"></span>
+                        </button></td>
                         </tr>
                     }
                         </tbody>
@@ -67,7 +72,8 @@
 
                     </table>
                         <p>
-                        <button type="button" class="btn btn-danger" style="margin-top : 1%">
+                        <button type="button" class="btn btn-danger" style="margin-top : 1%"
+                        data-toggle="modal" data-target="#myModal">
                             Agregar Vehiculo</button>
                         </p>
                 </div>
@@ -80,8 +86,9 @@
                 <div class="panel-body">
                     No cuenta con vehiculos registrados
                     <p>
-                    <button  type="button" class="btn btn-danger" style="margin-top: 1%">
-                        Agregar Vehiculo_Usuario</button>
+                    <button  type="button" class="btn btn-danger" style="margin-top: 1%"
+                    data-toggle="modal" data-target="#myModal">
+                        Agregar Vehiculo</button>
                     </p>
                 </div>
             </div>
@@ -197,9 +204,6 @@
                             <div class="form-group">
                                 <label for="sel1">Repuesto</label>
                                 <select class="form-control" id="sel1">
-                                    <option>Sistema</option>
-                                    <option>Producto de Consumo</option>
-                                    <option>Accesorios</option>
                                     <option>Aditivos</option>
                                     <option>Refrigerantes</option>
                                     <option>Lubricantes</option>
@@ -219,6 +223,77 @@
         </div>
 
         <div class="footer" id="footer"></div>
+
+            <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Agregar Vehiculo</h4>
+                    </div>
+                    <form class="form-horizontal">
+                    <div class="modal-body">
+
+                            <fieldset>
+
+                                <div class="form-group">
+                                    <label for="select" class="col-lg-2 control-label">Marca</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="select">
+                                            <option>Mazda</option>
+                                            <option>Toyota</option>
+                                            <option>Suzuki</option>
+                                        </select>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select" class="col-lg-2 control-label">Modelo</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="select">
+                                            <option>Mazda 3</option>
+                                            <option>Mazda 6</option>
+                                            <option>Yaris</option>
+                                            <option>Corolla</option>
+                                            <option>Alto</option>
+                                            <option>Swift</option>
+                                        </select>
+                                        <br>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputYear" class="col-lg-2 control-label">Year</label>
+                                    <div class="col-lg-10">
+                                        <input type="number" class="form-control" id="inputYear" placeholder="Year">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputColor" class="col-lg-2 control-label">Color</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" id="inputColor" placeholder="Color">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputKM" class="col-lg-2 control-label">KM</label>
+                                    <div class="col-lg-10">
+                                        <input type="number" class="form-control" id="inputKM" placeholder="KM">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Agregar</button>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
 

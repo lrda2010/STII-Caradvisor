@@ -3,9 +3,10 @@
 # ~~~~
 
 # Home page
-GET         /           controllers.Application.principal()
-POST        /           controllers.Application.ValidaciondeUsuario()
+GET         /                   controllers.Application.principal()
+POST        /                   controllers.Application.ValidaciondeUsuario()
 POST        /busqueda           controllers.Application.BusquedaRapida()
+POST        /agregar            controllers.Application.AgregarVehiculo()
 
 
 #Templates

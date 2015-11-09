@@ -88,6 +88,14 @@ public class Application extends Controller {
         }
     }
 
+    public static Result AgregarVehiculo(){
+
+        db.AgregarVehiculo(new Vehiculo_Usuario("03","Toyota",
+                "Corolla", 2003, "Rojo", 201010, "ocolfer"));
+
+        return ok();
+    }
+
     }
 
 

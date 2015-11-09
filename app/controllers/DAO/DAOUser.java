@@ -372,4 +372,36 @@ public class DAOUser implements IFUser {
 
         return resultado;
     }
+
+    @Override
+    public void AgregarVehiculo(Vehiculo_Usuario veh) {
+        Connection con = getConnection();
+        List<Mantenimiento> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "INSERT INTO vehiculo_usuario " +
+                    "(ID_Vehiculo,Marca,Modelo,year,Color,Kilometraje,FK_ID_Propietario) " +
+                    "VALUES (?,?,?,?,?,?,?)";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, veh.getID_vehiculo());
+            pstmt.setString(2, veh.getMarca());
+            pstmt.setString(3, veh.getModelo());
+            pstmt.setInt(4, veh.getYear());
+            pstmt.setString(5, veh.getColor());
+            pstmt.setInt(6, veh.getKilometraje());
+            pstmt.setString(7, veh.getFK_ID_usuario());
+
+
+           pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+    }
 }
