@@ -1,0 +1,135 @@
+@(error: Integer,
+        marca: String,
+        modelo: String,
+        km: Integer,
+        lstMantenimiento: java.util.List[Mantenimiento])
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+
+        <link rel="import" href="footer" id="pie">
+        <link rel="import" href="header" id="cabeza">
+
+
+        <title>Busqueda Rapida: Caradvisor</title>
+        <meta charset="UTF-8">
+            <!-- Bootstrap -->
+        <link href="@routes.Assets.at("css/bootstrap2.min.css")" rel="stylesheet">
+            <!-- Bootstrap theme -->
+        <link href="@routes.Assets.at("css/bootstrap-theme.css")" rel="stylesheet">
+            <!-- Custom styles for this template -->
+        <link href="@routes.Assets.at("css/signin.css")" rel="stylesheet">
+    </head>
+    <body background="../assets/wallpaperweb.jpg" style="background-size: auto">
+
+        <div id="header" style="margin-bottom : 10%"></div>
+
+        <div class="container">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Servicio a realizar</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                    <div class="col-md-4">
+                        <text class="h2">Marca: @marca</text>
+                    </div>
+                    <div class="col-md-4">
+                        <text class="h2">Modelo: @modelo</text>
+                    </div>
+                    <div class="col-md-4">
+                        <text class="h2">Kilometraje: @km</text>
+                    </div>
+                </div>
+                    <div class="row" style="margin-top: 5%">
+                        <ul class="list-group">
+                        @for(mantenimiento <- lstMantenimiento) {
+                            <li class="list-group-item">
+                                <text class="h4">- @mantenimiento.getLinea</text>
+                            </li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            </div>
+
+        <div class="container">
+            <div class="panel  panel-danger">
+                <div class="panel-heading">Busqueda por Repuesto</div>
+                <div class="panel-body">
+
+                    <div class="container col-md-6">
+                        <div class="form-group">
+                            <label for="sel1">Tipo de Repuesto</label>
+                            <select class="form-control" id="sel1">
+                                <option>Sistema</option>
+                                <option>Producto de Consumo</option>
+                                <option>Accesorios</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="container col-md-6">
+                        <div class="form-group">
+                            <label for="sel1">Repuesto</label>
+                            <select class="form-control" id="sel1">
+                                <option>Sistema</option>
+                                <option>Producto de Consumo</option>
+                                <option>Accesorios</option>
+                                <option>Aditivos</option>
+                                <option>Refrigerantes</option>
+                                <option>Lubricantes</option>
+                                <option>Baterias</option>
+                                <option>Iluminacion</option>
+                                <option>Audio</option>
+                                <option>Carroceria</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div >
+                        <button type="submit" class="btn btn-danger col-md-12">Buscar</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+            </div>
+
+
+        <div class="footer" id="footer"></div>
+
+
+
+            <!-- Bootstrap core JavaScript
+   ================================================== -->
+
+        <script>
+          var link = document.getElementById('pie');
+          var template = link.import.querySelector('template');
+          var clone = document.importNode(template.content, true);
+          document.querySelector('#footer').appendChild(clone);
+
+          var link2 = document.getElementById('cabeza');
+          var template2 = link2.import.querySelector('template');
+          var clone2 = document.importNode(template2.content, true);
+          document.querySelector('#header').appendChild(clone2);
+         </script>
+
+
+            <!-- Placed at the end of the document so the pages load faster -->
+        <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+        <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+
+    </body>
+</html>

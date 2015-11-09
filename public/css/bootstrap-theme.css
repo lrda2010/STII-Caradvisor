@@ -565,13 +565,23 @@ fieldset[disabled] .btn-danger.active {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffcf8e3', endColorstr='#fffaf2cc', GradientType=0);
   background-repeat: repeat-x;
 }
+.panel-danger {
+  border-color: #e74c3c;
+}
 .panel-danger > .panel-heading {
-  background-image: -webkit-linear-gradient(top, #f2dede 0%, #ebcccc 100%);
-  background-image:      -o-linear-gradient(top, #f2dede 0%, #ebcccc 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2dede), to(#ebcccc));
-  background-image:         linear-gradient(to bottom, #f2dede 0%, #ebcccc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffebcccc', GradientType=0);
-  background-repeat: repeat-x;
+  color: #ffffff;
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+}
+.panel-danger > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #e74c3c;
+}
+.panel-danger > .panel-heading .badge {
+  color: #e74c3c;
+  background-color: #ffffff;
+}
+.panel-danger > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #e74c3c;
 }
 .well {
   background-image: -webkit-linear-gradient(top, #e8e8e8 0%, #f5f5f5 100%);

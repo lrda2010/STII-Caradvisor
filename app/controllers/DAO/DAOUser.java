@@ -1,7 +1,8 @@
 package controllers.DAO;
+import models.Mantenimiento;
 import models.Proveedor;
 import models.User;
-import models.Vehiculo;
+import models.Vehiculo_Usuario;
 import play.db.*;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -78,13 +79,13 @@ public class DAOUser implements IFUser {
     public List listaVehiculos(User usuario) {
 
         Connection con = getConnection();
-        List<Vehiculo> resultado = new ArrayList<>();
+        List<Vehiculo_Usuario> resultado = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
 
 
         try {
-            String sql = "SELECT * FROM vehiculo WHERE FK_ID_Propietario=?";
+            String sql = "SELECT * FROM vehiculo_usuario WHERE FK_ID_Propietario=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, usuario.getUsername());
 
@@ -97,7 +98,7 @@ public class DAOUser implements IFUser {
         try {
             while (rs.next()) {
 
-                Vehiculo veh = new Vehiculo(
+                Vehiculo_Usuario veh = new Vehiculo_Usuario(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -291,6 +292,83 @@ public class DAOUser implements IFUser {
             e.printStackTrace();
         }
 
+
+        return resultado;
+    }
+
+    @Override
+    public Integer devolverIdMantenimiento(String marca, String modelo) {
+
+        Connection con = getConnection();
+        Integer resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT id FROM vehiculo_generico WHERE marca=? AND modelo=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, marca);
+            pstmt.setString(2, modelo);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+                resultado = rs.getInt(1);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
+
+    @Override
+    public List<Mantenimiento> devolverMantenimiento(Integer id, Integer kilometraje) {
+        Connection con = getConnection();
+        List<Mantenimiento> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM mantenimiento_preventivo " +
+                    "WHERE id_veh_gen=? AND ? between km_min and km_max";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.setInt(2, kilometraje);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+        try {
+            while (rs.next()) {
+
+                Mantenimiento mantenimiento = new Mantenimiento(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5));
+
+                resultado.add(mantenimiento);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return resultado;
     }

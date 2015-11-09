@@ -3,7 +3,7 @@ package models;
 /**
  * Created by Administrador on 04/11/2015.
  */
-public class Vehiculo {
+public class Vehiculo_Usuario {
 
     private String ID_vehiculo;
     private String marca;
@@ -13,7 +13,7 @@ public class Vehiculo {
     private int kilometraje;
     private String FK_ID_usuario;
 
-    public Vehiculo(String ID_vehiculo, String marca, String modelo, int year, String color, int kilometraje, String FK_ID_usuario) {
+    public Vehiculo_Usuario(String ID_vehiculo, String marca, String modelo, int year, String color, int kilometraje, String FK_ID_usuario) {
 
         this.ID_vehiculo = ID_vehiculo;
         this.marca = marca;

@@ -1,6 +1,6 @@
 @(
         id: Integer,
-        vehiculos: java.util.List[Vehiculo],
+        vehiculos: java.util.List[Vehiculo_Usuario],
         disTop: java.util.List[Proveedor],
         tapTop: java.util.List[Proveedor],
         mecTop: java.util.List[Proveedor]
@@ -14,10 +14,10 @@
         <link rel="import" href="header" id="cabeza">
 
 
-        <title>Inicio de Sesion: Caradvisor</title>
+        <title>Pagina Principal: Caradvisor</title>
         <meta charset="UTF-8">
             <!-- Bootstrap -->
-        <link href="@routes.Assets.at("css/bootstrap.min.css")" rel="stylesheet">
+        <link href="@routes.Assets.at("css/bootstrap2.min.css")" rel="stylesheet">
             <!-- Bootstrap theme -->
         <link href="@routes.Assets.at("css/bootstrap-theme.css")" rel="stylesheet">
             <!-- Custom styles for this template -->
@@ -32,11 +32,11 @@
             <div class="container col-md-6">
         @if(id==1) {
 
-            <div class="panel panel-default">
-                <div class="panel-heading " >Lista de vehiculos registrados</div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">Lista de vehiculos registrados</div>
                 <div class="panel-body">
 
-                    <table class="table">
+                    <table class="table table-bordered">
 
                         <thead>
                             <tr>
@@ -69,19 +69,19 @@
                         <p>
                         <button type="button" class="btn btn-danger" style="margin-top : 1%">
                             Agregar Vehiculo</button>
-                    </p>
+                        </p>
                 </div>
             </div>
 
         }else{
 
-            <div class="panel panel-default">
-                <div class="panel-heading " >Lista de vehiculos registrados</div>
+            <div class="panel  panel-danger">
+                <div class="panel-heading">Lista de vehiculos registrados</div>
                 <div class="panel-body">
                     No cuenta con vehiculos registrados
                     <p>
                     <button  type="button" class="btn btn-danger" style="margin-top: 1%">
-                        Agregar Vehiculo</button>
+                        Agregar Vehiculo_Usuario</button>
                     </p>
                 </div>
             </div>
@@ -89,11 +89,11 @@
         }
             </div>
             <div class="container col-md-6">
-                <div class="panel panel-default">
+                <div class="panel  panel-danger">
                     <div class="panel-heading">Ranking Top 4</div>
                     <div class="panel-body">
 
-                        <table class="table">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Distribuidores</th>
@@ -118,22 +118,25 @@
         </div>
         <div class="row">
             <div class="container col-md-6">
-                <div class="panel panel-default">
+                <div class="panel  panel-danger">
                     <div class="panel-heading">Busqueda Rapida</div>
                     <div class="panel-body">
+
+                        <form id="formulario" method="POST"
+                        action="@routes.Application.BusquedaRapida()">
 
                         <div class="container col-md-4">
                                 <p>Kilometraje</p>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="sizing-addon3">KM</span>
                                         <input type="text" class="form-control" placeholder="Kilometraje"
-                                        aria-describedby="sizing-addon3">
+                                        aria-describedby="sizing-addon3" name="kilometraje">
                                 </div>
                         </div>
                         <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="sel1">Marca</label>
-                                <select class="form-control" id="sel1">
+                                <select class="form-control" id="sel1" name="marca">
                                     <option>Mazda</option>
                                     <option>Toyota</option>
                                     <option>Susuki</option>
@@ -143,7 +146,7 @@
                         <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="sel1">Modelo</label>
-                                <select class="form-control" id="sel2">
+                                <select class="form-control" name="modelo">
 
                                     <option>Mazda 3</option>
                                     <option>Mazda 6</option>
@@ -154,15 +157,20 @@
                                 </select>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-danger">Buscar</button>
+                        </form>
                     </div>
+
                 </div>
+
             </div>
             <div class="container col-md-6">
-                <div class="panel panel-default">
+                <div class="panel  panel-danger">
                     <div class="panel-heading">Busqueda por Repuesto</div>
                     <div class="panel-body">
 
-                        <div class="container col-md-3">
+
+                        <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="sel1">Marca</label>
                                 <select class="form-control" id="sel1">
@@ -173,42 +181,36 @@
                             </div>
                         </div>
 
-                        <div class="container col-md-3">
+                        <div class="container col-md-4">
                             <div class="form-group">
-                                <label for="sel1">Sistema</label>
+                                <label for="sel1">Tipo de Repuesto</label>
                                 <select class="form-control" id="sel1">
-                                    <option>Trasmision</option>
-                                    <option>Suspension</option>
-                                    <option>Inyeccion</option>
+                                    <option>Sistema</option>
+                                    <option>Producto de Consumo</option>
+                                    <option>Accesorios</option>
                                 </select>
                             </div>
                         </div>
 
 
-                        <div class="container col-md-3">
+                        <div class="container col-md-4">
                             <div class="form-group">
-                                <label for="sel1">Producto de Consumo</label>
+                                <label for="sel1">Repuesto</label>
                                 <select class="form-control" id="sel1">
+                                    <option>Sistema</option>
+                                    <option>Producto de Consumo</option>
+                                    <option>Accesorios</option>
                                     <option>Aditivos</option>
                                     <option>Refrigerantes</option>
                                     <option>Lubricantes</option>
                                     <option>Baterias</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="container col-md-3">
-                            <div class="form-group">
-                                <label for="sel1">Accesorios</label>
-                                <select class="form-control" id="sel2">
-
                                     <option>Iluminacion</option>
                                     <option>Audio</option>
                                     <option>Carroceria</option>
                                 </select>
                             </div>
                         </div>
-
-
+                        <button type="submit" class="btn btn-danger">Buscar</button>
 
                     </div>
                 </div>
