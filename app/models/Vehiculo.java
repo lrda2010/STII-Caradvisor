@@ -10,17 +10,17 @@ public class Vehiculo {
     private String modelo;
     private int year;
     private String color;
-    private String caracteristicas;
+    private int kilometraje;
     private String FK_ID_usuario;
 
-    public Vehiculo(String ID_vehiculo, String marca, String modelo, int year, String color, String caracteristicas, String FK_ID_usuario) {
+    public Vehiculo(String ID_vehiculo, String marca, String modelo, int year, String color, int kilometraje, String FK_ID_usuario) {
 
         this.ID_vehiculo = ID_vehiculo;
         this.marca = marca;
         this.modelo = modelo;
         this.year = year;
         this.color = color;
-        this.caracteristicas = caracteristicas;
+        this.kilometraje = kilometraje;
         this.FK_ID_usuario = FK_ID_usuario;
     }
 
@@ -65,12 +65,12 @@ public class Vehiculo {
         this.color = color;
     }
 
-    public String getCaracteristicas() {
-        return caracteristicas;
+    public int getKilometraje() {
+        return kilometraje;
     }
 
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
+    public void setKilometraje(int kilometraje) {
+        this.kilometraje = kilometraje;
     }
 
     public String getFK_ID_usuario() {

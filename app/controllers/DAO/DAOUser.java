@@ -1,4 +1,5 @@
 package controllers.DAO;
+import models.Proveedor;
 import models.User;
 import models.Vehiculo;
 import play.db.*;
@@ -102,7 +103,7 @@ public class DAOUser implements IFUser {
                         rs.getString(3),
                         rs.getInt(4),
                         rs.getString(5),
-                        rs.getString(6),
+                        rs.getInt(6),
                         rs.getString(7));
 
                 resultado.add(veh);
@@ -128,5 +129,169 @@ public class DAOUser implements IFUser {
         return resultado;
 
 
+    }
+
+    @Override
+    public List<Proveedor> listaDistribuidoresTop() {
+        Connection con = getConnection();
+        List<Proveedor> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM proveedores WHERE tipo=\"dis\" order by proveedores.puntaje DESC limit 0,4";
+            pstmt = con.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+                Proveedor proveedor = new Proveedor(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8));
+
+                resultado.add(proveedor);
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            rs.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
+
+    }
+
+    @Override
+    public List<Proveedor> listaTalleresTop() {
+        Connection con = getConnection();
+        List<Proveedor> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM proveedores WHERE tipo=\"tal\" order by proveedores.puntaje DESC limit 0,4";
+            pstmt = con.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+                Proveedor proveedor = new Proveedor(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8));
+
+                resultado.add(proveedor);
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            rs.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
+
+    }
+
+    @Override
+    public List<Proveedor> listaMecanicosTop() {
+        Connection con = getConnection();
+        List<Proveedor> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM proveedores WHERE tipo=\"mec\" order by proveedores.puntaje DESC limit 0,4";
+            pstmt = con.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+                Proveedor proveedor = new Proveedor(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8));
+
+                resultado.add(proveedor);
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            rs.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
     }
 }

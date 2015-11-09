@@ -3,6 +3,7 @@ package controllers;
 //import play.*; //esto se usa para el lenguaje Scala
 
 import controllers.DAO.DAOUser;
+import models.Proveedor;
 import models.User;
 import models.Vehiculo;
 import play.data.DynamicForm;
@@ -48,11 +49,14 @@ public class Application extends Controller {
         if (result!= null) {
 
             List<Vehiculo> veh = db.listaVehiculos(result);
+            List<Proveedor> disTop = db.listaDistribuidoresTop();
+            List<Proveedor> talTop = db.listaTalleresTop();
+            List<Proveedor> mecTop = db.listaMecanicosTop();
 
-            if(veh == null){
-                return ok(intro.render(0, null));}
+            if(veh.isEmpty()){
+                return ok(intro.render(0, null,disTop,talTop,mecTop));}
             else{
-                return ok(intro.render(1, veh));
+                return ok(intro.render(1, veh,disTop,talTop,mecTop));
             }
 
         }else{

@@ -1,4 +1,10 @@
-@(id: Integer, vehiculos: java.util.List[Vehiculo])
+@(
+        id: Integer,
+        vehiculos: java.util.List[Vehiculo],
+        disTop: java.util.List[Proveedor],
+        tapTop: java.util.List[Proveedor],
+        mecTop: java.util.List[Proveedor]
+        )
 
 <!DOCTYPE html>
 <html>
@@ -19,10 +25,11 @@
     </head>
     <body background="../assets/wallpaperweb.jpg" style="background-size: auto">
 
-        <div id="header"></div>
+        <div id="header" style="margin-bottom : 10%"></div>
 
-        <div class="container" style="margin-top : 5%">
-
+        <div class="container">
+        <div class="row">
+            <div class="container col-md-6">
         @if(id==1) {
 
             <div class="panel panel-default">
@@ -38,7 +45,7 @@
                                 <th>Modelo</th>
                                 <th>A&ntilde;o</th>
                                 <th>Color</th>
-                                <th>Caracteristicas</th>
+                                <th>Kilometraje</th>
                             </tr>
                         </thead>
 
@@ -52,7 +59,7 @@
                         <td>@vehiculo.getModelo</td>
                         <td>@vehiculo.getYear</td>
                         <td>@vehiculo.getColor</td>
-                        <td>@vehiculo.getCaracteristicas</td>
+                        <td>@vehiculo.getKilometraje</td>
                         </tr>
                     }
                         </tbody>
@@ -80,7 +87,133 @@
             </div>
 
         }
+            </div>
+            <div class="container col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ranking Top 4</div>
+                    <div class="panel-body">
 
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Distribuidores</th>
+                                    <th>Talleres</th>
+                                    <th>Mecanicos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @for(i <- 0 to 3) {
+                                <tr>
+                                    <td>@disTop.get(i).getNombre</td>
+                                    <td>@tapTop.get(i).getNombre</td>
+                                    <td>@mecTop.get(i).getNombre</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Busqueda Rapida</div>
+                    <div class="panel-body">
+
+                        <div class="container col-md-4">
+                                <p>Kilometraje</p>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon3">KM</span>
+                                        <input type="text" class="form-control" placeholder="Kilometraje"
+                                        aria-describedby="sizing-addon3">
+                                </div>
+                        </div>
+                        <div class="container col-md-4">
+                            <div class="form-group">
+                                <label for="sel1">Marca</label>
+                                <select class="form-control" id="sel1">
+                                    <option>Mazda</option>
+                                    <option>Toyota</option>
+                                    <option>Susuki</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="container col-md-4">
+                            <div class="form-group">
+                                <label for="sel1">Modelo</label>
+                                <select class="form-control" id="sel2">
+
+                                    <option>Mazda 3</option>
+                                    <option>Mazda 6</option>
+                                    <option>Yaris</option>
+                                    <option>Corolla</option>
+                                    <option>Alto</option>
+                                    <option>Swift</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Busqueda por Repuesto</div>
+                    <div class="panel-body">
+
+                        <div class="container col-md-3">
+                            <div class="form-group">
+                                <label for="sel1">Marca</label>
+                                <select class="form-control" id="sel1">
+                                    <option>Mazda</option>
+                                    <option>Toyota</option>
+                                    <option>Susuki</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="container col-md-3">
+                            <div class="form-group">
+                                <label for="sel1">Sistema</label>
+                                <select class="form-control" id="sel1">
+                                    <option>Trasmision</option>
+                                    <option>Suspension</option>
+                                    <option>Inyeccion</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="container col-md-3">
+                            <div class="form-group">
+                                <label for="sel1">Producto de Consumo</label>
+                                <select class="form-control" id="sel1">
+                                    <option>Aditivos</option>
+                                    <option>Refrigerantes</option>
+                                    <option>Lubricantes</option>
+                                    <option>Baterias</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="container col-md-3">
+                            <div class="form-group">
+                                <label for="sel1">Accesorios</label>
+                                <select class="form-control" id="sel2">
+
+                                    <option>Iluminacion</option>
+                                    <option>Audio</option>
+                                    <option>Carroceria</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
 
         <div class="footer" id="footer"></div>
@@ -96,7 +229,7 @@
           var clone = document.importNode(template.content, true);
           document.querySelector('#footer').appendChild(clone);
 
-           var link2 = document.getElementById('cabeza');
+          var link2 = document.getElementById('cabeza');
           var template2 = link2.import.querySelector('template');
           var clone2 = document.importNode(template2.content, true);
           document.querySelector('#header').appendChild(clone2);
