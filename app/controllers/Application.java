@@ -67,7 +67,6 @@ public class Application extends Controller {
         return ok(login.render(0));
     }
 
-
     public static Result BusquedaRapida(){
 
 
