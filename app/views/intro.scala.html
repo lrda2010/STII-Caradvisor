@@ -141,8 +141,15 @@
                         </div>
                         <div class="container col-md-4">
                             <div class="form-group">
-                                <label for="sel1">Marca</label>
-                                <select class="form-control" id="sel1" name="marca">
+                                <label for="marca">Marca</label>
+                                <select id="mySelect" name="marca" class="form-control"
+                                onchange="myFunction()">
+                                    <script>
+                                    function myFunction() {
+                                    var x = document.getElementById("mySelect").value;
+                                    alert("You selected: " + x);
+                                    }
+                                    </script>
                                     <option>Mazda</option>
                                     <option>Toyota</option>
                                     <option>Susuki</option>
@@ -299,6 +306,7 @@
    ================================================== -->
 
         <script>
+
           var link = document.getElementById('pie');
           var template = link.import.querySelector('template');
           var clone = document.importNode(template.content, true);
@@ -308,8 +316,8 @@
           var template2 = link2.import.querySelector('template');
           var clone2 = document.importNode(template2.content, true);
           document.querySelector('#header').appendChild(clone2);
-         </script>
 
+          </script>
 
             <!-- Placed at the end of the document so the pages load faster -->
         <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
