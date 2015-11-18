@@ -5,15 +5,26 @@ package models;
  */
 public class Vehiculo_Usuario {
 
-    private String ID_vehiculo;
+    private int ID_vehiculo;
     private String marca;
     private String modelo;
     private int year;
     private String color;
     private int kilometraje;
     private String FK_ID_usuario;
+    private int contador;
 
-    public Vehiculo_Usuario(String ID_vehiculo, String marca, String modelo, int year, String color, int kilometraje, String FK_ID_usuario) {
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
+
+    public Vehiculo_Usuario(int ID_vehiculo, String marca, String modelo,
+                            int year, String color, int kilometraje,
+                            String FK_ID_usuario) {
 
         this.ID_vehiculo = ID_vehiculo;
         this.marca = marca;
@@ -24,13 +35,29 @@ public class Vehiculo_Usuario {
         this.FK_ID_usuario = FK_ID_usuario;
     }
 
+    public Vehiculo_Usuario(String marca, String modelo, int year,
+                            String color, int kilometraje,
+                            String FK_ID_usuario) {
 
-    public String getID_vehiculo() {
-        return ID_vehiculo;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.year = year;
+        this.color = color;
+        this.kilometraje = kilometraje;
+        this.FK_ID_usuario = FK_ID_usuario;
     }
 
-    public void setID_vehiculo(String ID_vehiculo) {
+    public Vehiculo_Usuario(int ID_vehiculo, String marca, String modelo,
+                            int year, String color, int kilometraje,
+                            String FK_ID_usuario, int contador) {
         this.ID_vehiculo = ID_vehiculo;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.year = year;
+        this.color = color;
+        this.kilometraje = kilometraje;
+        this.FK_ID_usuario = FK_ID_usuario;
+        this.contador = contador;
     }
 
     public String getMarca() {
@@ -79,5 +106,13 @@ public class Vehiculo_Usuario {
 
     public void setFK_ID_usuario(String FK_ID_usuario) {
         this.FK_ID_usuario = FK_ID_usuario;
+    }
+
+    public int getID_vehiculo() {
+        return ID_vehiculo;
+    }
+
+    public void setID_vehiculo(int ID_vehiculo) {
+        this.ID_vehiculo = ID_vehiculo;
     }
 }

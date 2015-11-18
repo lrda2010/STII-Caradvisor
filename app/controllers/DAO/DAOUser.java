@@ -17,6 +17,7 @@ public class DAOUser implements IFUser {
 
     DataSource ds = DB.getDataSource();
     Connection con;
+    private int contador;
 
     @Override
     public Connection getConnection() {
@@ -85,7 +86,7 @@ public class DAOUser implements IFUser {
 
 
         try {
-            String sql = "SELECT * FROM vehiculo_usuario WHERE FK_ID_Propietario=?";
+            String sql = "SELECT * FROM vehiculo_user WHERE FK_ID_Propietario=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, usuario.getUsername());
 
@@ -98,14 +99,19 @@ public class DAOUser implements IFUser {
         try {
             while (rs.next()) {
 
+                contador++;
+
                 Vehiculo_Usuario veh = new Vehiculo_Usuario(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getString(7));
+                        rs.getString(7),
+                        contador);
+
+
 
                 resultado.add(veh);
 
@@ -382,21 +388,19 @@ public class DAOUser implements IFUser {
 
 
         try {
-            String sql = "INSERT INTO vehiculo_usuario " +
-                    "(ID_Vehiculo,Marca,Modelo,year,Color,Kilometraje,FK_ID_Propietario) " +
-                    "VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO vehiculo_user " +
+                    "(marca,modelo,year,color,kilometraje,FK_ID_Propietario) " +
+                    "VALUES (?,?,?,?,?,?)";
 
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, veh.getID_vehiculo());
-            pstmt.setString(2, veh.getMarca());
-            pstmt.setString(3, veh.getModelo());
-            pstmt.setInt(4, veh.getYear());
-            pstmt.setString(5, veh.getColor());
-            pstmt.setInt(6, veh.getKilometraje());
-            pstmt.setString(7, veh.getFK_ID_usuario());
+            pstmt.setString(1, veh.getMarca());
+            pstmt.setString(2, veh.getModelo());
+            pstmt.setInt(3, veh.getYear());
+            pstmt.setString(4, veh.getColor());
+            pstmt.setInt(5, veh.getKilometraje());
+            pstmt.setString(6, veh.getFK_ID_usuario());
 
-
-           pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

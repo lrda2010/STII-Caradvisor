@@ -7,6 +7,7 @@ import models.Mantenimiento;
 import models.Proveedor;
 import models.User;
 import models.Vehiculo_Usuario;
+import play.cache.Cache;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -45,6 +46,8 @@ public class Application extends Controller {
 
         if (result!= null) {
 
+            session().put("user",result.getUsername());
+            Cache.set("user",result);
             List<Vehiculo_Usuario> veh = db.listaVehiculos(result);
             List<Proveedor> disTop = db.listaDistribuidoresTop();
             List<Proveedor> talTop = db.listaTalleresTop();
@@ -64,6 +67,7 @@ public class Application extends Controller {
 
     public static Result LogOut(){
         session().clear();
+        Cache.remove("user");
         return ok(login.render(0));
     }
 
@@ -89,10 +93,23 @@ public class Application extends Controller {
 
     public static Result AgregarVehiculo(){
 
-        db.AgregarVehiculo(new Vehiculo_Usuario("03","Toyota",
-                "Corolla", 2003, "Rojo", 201010, "ocolfer"));
+        DynamicForm requestData = Form.form().bindFromRequest();
+        int km = Integer.parseInt(requestData.get("km"));
+        String marca = requestData.get("marca");
+        String modelo = requestData.get("modelo");
+        String color = requestData.get("color");
+        int year = Integer.parseInt(requestData.get("year"));
 
-        return ok();
+        db.AgregarVehiculo(new Vehiculo_Usuario(marca,
+                modelo, year, color, km, session().get("user")));
+
+        List<Vehiculo_Usuario> veh = db.listaVehiculos((User) Cache.get("user"));
+        List<Proveedor> disTop = db.listaDistribuidoresTop();
+        List<Proveedor> talTop = db.listaTalleresTop();
+        List<Proveedor> mecTop = db.listaMecanicosTop();
+
+        return ok(intro.render(1, veh,disTop,talTop,mecTop));
+
     }
 
     }

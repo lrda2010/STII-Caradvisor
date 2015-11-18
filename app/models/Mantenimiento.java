@@ -20,7 +20,6 @@ public class Mantenimiento {
         this.km_max = km_max;
     }
 
-
     public int getId() {
         return id;
     }
@@ -61,3 +60,4 @@ public class Mantenimiento {
         this.km_max = km_max;
     }
 }
+
