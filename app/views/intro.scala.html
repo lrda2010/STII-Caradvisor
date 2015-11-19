@@ -54,16 +54,23 @@
 
                     @for(vehiculo <- vehiculos) {
                         <tr>
+                            <form method="post" action="@routes.Application.BusquedaRapida()">
+                            <input type="hidden" name="kilometraje" value="@vehiculo.getKilometraje" />
+                            <input type="hidden" name="marca" value="@vehiculo.getMarca" />
+                            <input type="hidden" name="modelo" value="@vehiculo.getModelo" />
                         <th>@vehiculo.getContador</th>
                         <td>@vehiculo.getMarca</td>
                         <td>@vehiculo.getModelo</td>
                         <td>@vehiculo.getYear</td>
                         <td>@vehiculo.getColor</td>
                         <td>@vehiculo.getKilometraje</td>
-                        <td><button type="button" class="btn btn-danger">
+                        <td>
+                            <button type="submit" class="btn btn-danger">
                             <span class="glyphicon glyphicon-chevron-right"
                             aria-hidden="true"></span>
-                        </button></td>
+                        </button>
+                        </td>
+                        </form>
                         </tr>
                     }
                         </tbody>
@@ -142,31 +149,20 @@
                         <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="marca">Marca</label>
-                                <select id="mySelect" name="marca" class="form-control"
-                                onchange="myFunction()">
-                                    <script>
-                                    function myFunction() {
-                                    var x = document.getElementById("mySelect").value;
-                                    alert("You selected: " + x);
-                                    }
-                                    </script>
+                                <select id="marca" name="marca" class="form-control">
+
                                     <option>Mazda</option>
                                     <option>Toyota</option>
-                                    <option>Susuki</option>
+                                    <option>Suzuki</option>
                                 </select>
                             </div>
                         </div>
                         <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="sel1">Modelo</label>
-                                <select class="form-control" name="modelo">
-
+                                <select id="modelo" class="form-control" name="modelo">
                                     <option>Mazda 3</option>
                                     <option>Mazda 6</option>
-                                    <option>Yaris</option>
-                                    <option>Corolla</option>
-                                    <option>Alto</option>
-                                    <option>Swift</option>
                                 </select>
                             </div>
                         </div>
@@ -197,7 +193,7 @@
                         <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="sel1">Tipo de Repuesto</label>
-                                <select class="form-control" id="sel1">
+                                <select class="form-control" id="trepuesto" name="trepuesto">
                                     <option>Sistema</option>
                                     <option>Producto de Consumo</option>
                                     <option>Accesorios</option>
@@ -209,14 +205,11 @@
                         <div class="container col-md-4">
                             <div class="form-group">
                                 <label for="sel1">Repuesto</label>
-                                <select class="form-control" id="sel1">
-                                    <option>Aditivos</option>
-                                    <option>Refrigerantes</option>
-                                    <option>Lubricantes</option>
-                                    <option>Baterias</option>
-                                    <option>Iluminacion</option>
-                                    <option>Audio</option>
-                                    <option>Carroceria</option>
+                                <select class="form-control" id="repuesto" name="repuesto">
+                                    <option>Inyeccion</option>
+                                    <option>Suspension</option>
+                                    <option>Trasmision</option>
+                                    <option>Embrague</option>
                                 </select>
                             </div>
                         </div>
@@ -248,7 +241,8 @@
                                 <div class="form-group">
                                     <label for="select" class="col-lg-2 control-label">Marca</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" id="select" name="marca">
+                                        <select id="marcaM" class="form-control"
+                                        id="select" name="marcaM">
                                             <option>Mazda</option>
                                             <option>Toyota</option>
                                             <option>Suzuki</option>
@@ -259,13 +253,9 @@
                                 <div class="form-group">
                                     <label for="select" class="col-lg-2 control-label">Modelo</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" id="select" name="modelo">
+                                        <select id="modeloM" class="form-control" name="modeloM">
                                             <option>Mazda 3</option>
                                             <option>Mazda 6</option>
-                                            <option>Yaris</option>
-                                            <option>Corolla</option>
-                                            <option>Alto</option>
-                                            <option>Swift</option>
                                         </select>
                                         <br>
                                     </div>
@@ -301,6 +291,10 @@
         </div>
         </div>
 
+            <!-- Placed at the end of the document so the pages load faster -->
+        <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+        <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+
 
             <!-- Bootstrap core JavaScript
    ================================================== -->
@@ -317,11 +311,83 @@
           var clone2 = document.importNode(template2.content, true);
           document.querySelector('#header').appendChild(clone2);
 
-          </script>
+          $(function () {
+            var $marca = $("#marca"),
+                $modelo = $("#modelo"),
+                $marcaM = $("#marcaM"),
+                $modeloM = $("#modeloM"),
+                $trepuesto = $("#trepuesto"),
+                $repuesto = $("#repuesto")
 
-            <!-- Placed at the end of the document so the pages load faster -->
-        <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
-        <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+            $marca.on('change', function (e) {
+                var x = $marca.val(),
+                    list;
+                switch (x) {
+                    case "Mazda":
+                        list = ["Mazda 3", "Mazda 6"];
+                        break;
+                    case "Toyota":
+                        list = ["Yaris", "Corolla"];
+                        break;
+                    case "Suzuki":
+                        list = ["Swift", "Alto"];
+                        break;
+                }
+                $modelo.html(compact.options(list));
+            });
+
+
+            $marcaM.on('change', function (e) {
+                var x = $marcaM.val(),
+                    list;
+                switch (x) {
+                    case "Mazda":
+                        list = ["Mazda 3", "Mazda 6"];
+                        break;
+                    case "Toyota":
+                        list = ["Yaris", "Corolla"];
+                        break;
+                    case "Suzuki":
+                        list = ["Swift", "Alto"];
+                        break;
+                }
+                $modeloM.html(compact.options(list));
+            });
+
+
+                $trepuesto.on('change', function (e) {
+                var x = $trepuesto.val(),
+                    list;
+                switch (x) {
+                    case "Sistema":
+                        list = ["Inyeccion", "Suspension", "Trasmision", "Embrague"];
+                        break;
+                    case "Producto de Consumo":
+                        list = ["Aditivos", "Lubricantes", "Iluminacion", "Baterias", "Frenos"];
+                        break;
+                    case "Accesorios":
+                        list = ["Carroceria", "Audio"];
+                        break;
+                }
+                $repuesto.html(compact.options(list));
+            });
+
+
+
+            var compact = {
+                options: function (list) {
+                    var str = "";
+                    for (opt in list) {
+                        str += "<option>" + list[opt] + "</option>"
+                    }
+                    return str;
+                }
+            }
+          });
+
+        </script>
+
+
 
     </body>
 </html>

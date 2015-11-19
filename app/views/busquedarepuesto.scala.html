@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+
+        <link rel="import" href="footer" id="pie">
+        <link rel="import" href="header" id="cabeza">
+
+
+        <title>Busqueda Rapida: Caradvisor</title>
+        <meta charset="UTF-8">
+            <!-- Bootstrap -->
+        <link href="@routes.Assets.at("css/bootstrap2.min.css")" rel="stylesheet">
+            <!-- Bootstrap theme -->
+        <link href="@routes.Assets.at("css/bootstrap-theme.css")" rel="stylesheet">
+            <!-- Custom styles for this template -->
+        <link href="@routes.Assets.at("css/signin.css")" rel="stylesheet">
+    </head>
+    <body background="../assets/wallpaperweb.jpg" style="background-size: auto">
+
+        <div id="header" style="margin-bottom : 10%"></div>
+
+        <div class="container"></div>
+
+
+        <div class="footer" id="footer"></div>
+
+
+
+            <!-- Bootstrap core JavaScript
+   ================================================== -->
+
+        <script>
+          var link = document.getElementById('pie');
+          var template = link.import.querySelector('template');
+          var clone = document.importNode(template.content, true);
+          document.querySelector('#footer').appendChild(clone);
+
+          var link2 = document.getElementById('cabeza');
+          var template2 = link2.import.querySelector('template');
+          var clone2 = document.importNode(template2.content, true);
+          document.querySelector('#header').appendChild(clone2);
+         </script>
+
+
+            <!-- Placed at the end of the document so the pages load faster -->
+        <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+        <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+
+    </body>
+</html>

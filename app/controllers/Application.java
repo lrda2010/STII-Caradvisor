@@ -3,10 +3,7 @@ package controllers;
 //import play.*; //esto se usa para el lenguaje Scala
 
 import controllers.DAO.DAOUser;
-import models.Mantenimiento;
-import models.Proveedor;
-import models.User;
-import models.Vehiculo_Usuario;
+import models.*;
 import play.cache.Cache;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -75,12 +72,12 @@ public class Application extends Controller {
 
 
         DynamicForm requestData = Form.form().bindFromRequest();
+
         int km = Integer.parseInt(requestData.get("kilometraje"));
         String marca = requestData.get("marca");
         String modelo = requestData.get("modelo");
 
         Integer id = db.devolverIdMantenimiento(marca,modelo);
-        System.out.println("El id devuelto es: " + id);
         List<Mantenimiento> mantenimientos = db.devolverMantenimiento(id,km);
 
         if(mantenimientos.isEmpty()) {
@@ -90,6 +87,18 @@ public class Application extends Controller {
             return ok(busquedarapida.render(1,marca,modelo,km,mantenimientos));
         }
     }
+
+    public static Result BusquedaRepuesto(){
+
+        DynamicForm requestData = Form.form().bindFromRequest();
+        String marca = requestData.get("marca");
+        String trepuesto = requestData.get("trepuesto");
+        Integer id = db.devolverIdRepuesto(marca);
+        List<Repuesto> repuestos = db.devolverRepuestos(id, trepuesto);
+
+        return ok(busquedarepuesto.render());
+    }
+
 
     public static Result AgregarVehiculo(){
 

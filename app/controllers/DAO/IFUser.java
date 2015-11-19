@@ -1,9 +1,6 @@
 package controllers.DAO;
 
-import models.Mantenimiento;
-import models.Proveedor;
-import models.User;
-import models.Vehiculo_Usuario;
+import models.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -22,6 +19,8 @@ public interface IFUser {
     Integer devolverIdMantenimiento(String marca, String modelo);
     List<Mantenimiento> devolverMantenimiento(Integer id, Integer kilometraje);
     void AgregarVehiculo(Vehiculo_Usuario veh);
+    Integer devolverIdRepuesto(String marca);
+    List<Repuesto> devolverRepuestos(Integer id, String trepuesto);
 
 }
 

@@ -1,8 +1,5 @@
 package controllers.DAO;
-import models.Mantenimiento;
-import models.Proveedor;
-import models.User;
-import models.Vehiculo_Usuario;
+import models.*;
 import play.db.*;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -408,4 +405,83 @@ public class DAOUser implements IFUser {
         }
 
     }
+
+    @Override
+    public Integer devolverIdRepuesto(String marca) {
+
+        Connection con = getConnection();
+        Integer resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT id FROM vehiculo_generico WHERE marca=? LIMIT 0,1";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, marca);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+                resultado = rs.getInt(1);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+
+    }
+
+    @Override
+    public List<Repuesto> devolverRepuestos(Integer id, String trepuesto) {
+
+        Connection con = getConnection();
+        List<Repuesto> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "SELECT * FROM repuesto " +
+                    "WHERE id_veh_gen=? AND tipo_repuesto=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.setString(2,trepuesto);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+        try {
+            while (rs.next()) {
+
+                Repuesto repuesto = new Repuesto(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6)) ;
+
+                resultado.add(repuesto);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
+
 }
