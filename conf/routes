@@ -6,7 +6,7 @@
 GET         /                   controllers.Application.principal()
 POST        /                   controllers.Application.ValidaciondeUsuario()
 POST        /busqueda           controllers.Application.BusquedaRapida()
-POST        /busqueda           controllers.Application.BusquedaRepuesto()
+POST        /repuesto           controllers.Application.BusquedaRepuesto()
 POST        /agregar            controllers.Application.AgregarVehiculo()
 
 

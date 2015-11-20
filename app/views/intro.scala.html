@@ -177,6 +177,8 @@
                 <div class="panel  panel-danger">
                     <div class="panel-heading">Busqueda por Repuesto</div>
                     <div class="panel-body">
+                        <form id="formulario" method="POST"
+                        action="@routes.Application.BusquedaRepuesto()">
 
 
                         <div class="container col-md-4">
@@ -214,12 +216,12 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-danger">Buscar</button>
-
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+
 
         <div class="footer" id="footer"></div>
 

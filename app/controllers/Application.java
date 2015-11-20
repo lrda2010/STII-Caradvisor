@@ -96,7 +96,7 @@ public class Application extends Controller {
         Integer id = db.devolverIdRepuesto(marca);
         List<Repuesto> repuestos = db.devolverRepuestos(id, trepuesto);
 
-        return ok(busquedarepuesto.render());
+        return ok(busquedarepuesto.render(marca, repuestos));
     }
 
 
@@ -104,8 +104,8 @@ public class Application extends Controller {
 
         DynamicForm requestData = Form.form().bindFromRequest();
         int km = Integer.parseInt(requestData.get("km"));
-        String marca = requestData.get("marca");
-        String modelo = requestData.get("modelo");
+        String marca = requestData.get("marcaM");
+        String modelo = requestData.get("modeloM");
         String color = requestData.get("color");
         int year = Integer.parseInt(requestData.get("year"));
 
