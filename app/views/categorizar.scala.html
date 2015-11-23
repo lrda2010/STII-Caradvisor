@@ -1,0 +1,205 @@
+@(proveedor: Proveedor)
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+
+        <title>Busqueda Rapida: Caradvisor</title>
+        <meta charset="UTF-8">
+            <!-- Bootstrap -->
+        <link href="@routes.Assets.at("css/bootstrap2.min.css")" rel="stylesheet">
+            <!-- Bootstrap theme -->
+        <link href="@routes.Assets.at("css/bootstrap-theme.css")" rel="stylesheet">
+            <!-- Custom styles for this template -->
+        <link href="@routes.Assets.at("css/signin.css")" rel="stylesheet">
+    </head>
+    <body background="../assets/wallpaperweb.jpg" style="background-size : auto">
+
+        @cabecera()
+
+    <div class="container" style="margin-top : 5%">
+
+        <div class="panel panel-danger">
+            <form action="@routes.Application.CategorizarOK()" method="POST">
+            <div class="panel-heading">
+                <h3 class="panel-title">Categorizar: @proveedor.getNombre</h3>
+            </div>
+
+            <div class="panel-body col-md-6">
+                <div class="form-group">
+                    <label for="comment">Comentario:</label>
+                    <textarea class="form-control" rows="5"
+                    name="comment" id="comment"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="comment">Calificacion General:</label>
+                    <select class="form-control"
+                    id="calificacionG" name="calificacionG">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+
+                </select>
+                </div>
+                        <button type="submit"
+                        class="btn btn-danger col-md-12">
+                            <span class="glyphicon glyphicon glyphicon-ok"></span>
+                            Categorizar</button>
+                </div>
+
+                <div class="panel-body col-md-6">
+                    <div class="container">
+                        <h2>Mejor Precio</h2>
+                        <form role="form">
+                            <label class="checkbox-inline">
+                                <input type="radio" value="1"
+                                name="precio" id="precio">Indiferente
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="2"
+                                name="precio" id="precio">Muy Caro
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="3"
+                                name="precio" id="precio">Caro
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="4"
+                                name="precio" id="precio">Justo
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="5"
+                                name="precio" id="precio">Regular
+                            </label>
+                        </form>
+                    </div>
+
+                    <div class="container">
+                        <h2>Calidad</h2>
+                        <form role="form">
+                            <label class="checkbox-inline">
+                                <input type="radio" value="1"
+                                name="calidad" id="calidad">Pesimo
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="2"
+                                name="calidad" id="calidad">Malo
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="3"
+                                name="calidad" id="calidad">Regular
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="4"
+                                name="calidad" id="calidad">Bueno
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="5"
+                                name="calidad" id="calidad">Excelente
+                            </label>
+                        </form>
+                    </div>
+
+                    <div class="container">
+                        <h2>Ubicacion</h2>
+                        <form role="form">
+                            <label class="checkbox-inline">
+                                <input type="radio" value="1"
+                                name="ubicacion" id="ubicacion">Escondido
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="2"
+                                name="ubicacion" id="ubicacion">Facil
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="3"
+                                name="ubicacion" id="ubicacion">Zona Movida
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="4"
+                                name="ubicacion" id="ubicacion">Zona Segura
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="5"
+                                name="ubicacion" id="ubicacion">Ideal
+                            </label>
+                        </form>
+                    </div>
+
+                    <div class="container">
+                        <h2>Equipo Laboral</h2>
+                        <form role="form">
+                            <label class="checkbox-inline">
+                                <input type="radio" value="1"
+                                name="elaboral" id="elaboral">Indiferentes
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="2"
+                                name="elaboral" id="elaboral">Novatos
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="3"
+                                name="elaboral" id="elaboral">Regular
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="4"
+                                name="elaboral" id="elaboral">Bueno
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="5"
+                                name="elaboral" id="elaboral">Expertos
+                            </label>
+                        </form>
+                    </div>
+
+                    <div class="container">
+                        <h2>Nivel de Repuestos</h2>
+                        <form role="form">
+                            <label class="checkbox-inline">
+                                <input type="radio" value="1"
+                                name="nrepuesto" id="nrepuesto">Muy Bajos
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="2"
+                                name="nrepuesto" id="nrepuesto">Bajos
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="3"
+                                name="nrepuesto" id="nrepuesto">Medio
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="4"
+                                name="nrepuesto" id="nrepuesto">Variado
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" value="5"
+                                name="nrepuesto" id="nrepuesto">Muy Variado
+                            </label>
+                        </form>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        </div>
+
+
+        @retroceder()
+        @footer()
+
+
+            <!-- Bootstrap core JavaScript
+   ================================================== -->
+
+
+            <!-- Placed at the end of the document so the pages load faster -->
+        <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+        <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+
+    </body>
+</html>

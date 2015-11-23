@@ -57,7 +57,20 @@
         </div>
 
 
-       @retroceder()
+        <div class="container">
+            <form action="@routes.Application.Categorizar()" method="POST">
+                <input type="hidden" value="@prov" id="prov" name="prov">
+                <button type="submit"
+                class="btn btn-danger col-md-12">
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Categorizar</button>
+            </form>
+        </div>
+
+
+
+
+        @retroceder()
 
        @footer()
 

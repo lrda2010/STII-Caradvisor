@@ -174,9 +174,24 @@ public class Application extends Controller {
 
     public static Result Proveedor(String id){
 
+        session().put("id_prov",id);
+
         Proveedor pro = db.devolverProveedor(id);
         String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
         return ok(proveedor.render(pro, cad));
+    }
+
+    public static Result Categorizar(){
+
+        Proveedor pro = db.devolverProveedor(session().get("id_prov"));
+        return ok(categorizar.render(pro));
+    }
+
+    public static Result CategorizarOK(){
+
+        Proveedor pro = db.devolverProveedor(session().get("id_prov"));
+        String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
+        return ok(proveedor.render(pro,cad));
     }
 
     }
