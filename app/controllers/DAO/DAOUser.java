@@ -63,8 +63,6 @@ public class DAOUser implements IFUser {
         }
 
         try {
-            pstmt.close();
-            rs.close();
             con.close();
 
         } catch (SQLException e) {
@@ -121,8 +119,6 @@ public class DAOUser implements IFUser {
         }
 
         try {
-            pstmt.close();
-            rs.close();
             con.close();
 
         } catch (SQLException e) {
@@ -177,8 +173,6 @@ public class DAOUser implements IFUser {
         }
 
         try {
-            pstmt.close();
-            rs.close();
             con.close();
 
         } catch (SQLException e) {
@@ -232,8 +226,6 @@ public class DAOUser implements IFUser {
         }
 
         try {
-            pstmt.close();
-            rs.close();
             con.close();
 
         } catch (SQLException e) {
@@ -287,8 +279,6 @@ public class DAOUser implements IFUser {
         }
 
         try {
-            pstmt.close();
-            rs.close();
             con.close();
 
         } catch (SQLException e) {
@@ -329,6 +319,13 @@ public class DAOUser implements IFUser {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         return resultado;
     }
@@ -373,6 +370,13 @@ public class DAOUser implements IFUser {
             e.printStackTrace();
         }
 
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         return resultado;
     }
 
@@ -403,6 +407,13 @@ public class DAOUser implements IFUser {
             e.printStackTrace();
 
         }
+
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -435,6 +446,13 @@ public class DAOUser implements IFUser {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         return resultado;
 
@@ -481,7 +499,75 @@ public class DAOUser implements IFUser {
             e.printStackTrace();
         }
 
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         return resultado;
+    }
+
+    @Override
+    public void RegistrarUsuario(User_Prop propietario, User usuario) {
+
+        Connection con = getConnection();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "INSERT INTO propietario_vehiculo " +
+                    "(ID_Propietario,Nombre,Apellido,DNI,Direccion,Telefono) " +
+                    "VALUES (?,?,?,?,?,?)";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, propietario.getId());
+            pstmt.setString(2, propietario.getNombre());
+            pstmt.setString(3, propietario.getApellido());
+            pstmt.setString(4, propietario.getDNI());
+            pstmt.setString(5, propietario.getDireccion());
+            pstmt.setInt(6, propietario.getTelefono());
+
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            String sql = "INSERT INTO usuario_foro " +
+                    "(ID_Usuario_Foro,username,password,DNI,Email,Perfil,FK_ID_Propietario) " +
+                    "VALUES (?,?,?,?,?,?,?)";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, usuario.getID_Usuario_foro());
+            pstmt.setString(2, usuario.getUsername());
+            pstmt.setString(3, usuario.getPassword());
+            pstmt.setString(4, usuario.getDNI());
+            pstmt.setString(5, usuario.getEmail());
+            pstmt.setString(6, usuario.getPerfil());
+            pstmt.setString(7, usuario.getFK_ID_propietario());
+
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
 }

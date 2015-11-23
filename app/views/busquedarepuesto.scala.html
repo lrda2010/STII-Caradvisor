@@ -7,10 +7,6 @@
 <html>
     <head lang="en">
 
-        <link rel="import" href="footer" id="pie">
-        <link rel="import" href="header" id="cabeza">
-
-
         <title>Busqueda Rapida: Caradvisor</title>
         <meta charset="UTF-8">
             <!-- Bootstrap -->
@@ -20,71 +16,58 @@
             <!-- Custom styles for this template -->
         <link href="@routes.Assets.at("css/signin.css")" rel="stylesheet">
     </head>
-    <body background="../assets/wallpaperweb.jpg" style="background-size: auto">
+    <body background="../assets/wallpaperweb.jpg" style="background-size : auto">
 
-        <div id="header" style="margin-bottom : 10%"></div>
+        @header()
 
-        <div class="container">
 
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Repuestos a comprar</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div>
-                            <text class="h2">Marca Auto: @marca</text>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 5%">
+    <div class="container" style="margin-top : 5%">
 
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Marca</th>
-                                    <th>Tipo</th>
-                                    <th>Origen</th>
-                                    <th>Tipo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @for(repuesto <- lstRepuestos) {
-                                <tr>
-                                    <td>@repuesto.getMarca</td>
-                                    <td>@repuesto.getTipo</td>
-                                    <td>@repuesto.getOrigen</td>
-                                    <td>@repuesto.getTipo_repuesto</td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Repuestos a comprar</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div>
+                        <text class="h2">&nbsp; Marca: @marca</text>
                     </div>
                 </div>
+                <div class="row" style="margin-top : 5 %">
 
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                                <th>Origen</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for(repuesto <- lstRepuestos) {
+                            <tr>
+                                <td>@repuesto.getMarca</td>
+                                <td>@repuesto.getTipo</td>
+                                <td>@repuesto.getOrigen</td>
+                                <td>@repuesto.getTipo_repuesto</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
 
+                </div>
+            </div>
 
+        </div>
         </div>
 
 
-        <div class="footer" id="footer"></div>
-
+       @footer()
 
 
             <!-- Bootstrap core JavaScript
    ================================================== -->
-
-        <script>
-          var link = document.getElementById('pie');
-          var template = link.import.querySelector('template');
-          var clone = document.importNode(template.content, true);
-          document.querySelector('#footer').appendChild(clone);
-
-          var link2 = document.getElementById('cabeza');
-          var template2 = link2.import.querySelector('template');
-          var clone2 = document.importNode(template2.content, true);
-          document.querySelector('#header').appendChild(clone2);
-         </script>
 
 
             <!-- Placed at the end of the document so the pages load faster -->

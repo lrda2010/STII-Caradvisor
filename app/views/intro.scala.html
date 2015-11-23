@@ -4,14 +4,10 @@
         disTop: java.util.List[Proveedor],
         tapTop: java.util.List[Proveedor],
         mecTop: java.util.List[Proveedor]
-    )
+        )
 
 <html>
     <head lang="en">
-
-        <link rel="import" href="footer" id="pie">
-        <link rel="import" href="header" id="cabeza">
-
 
         <title>Pagina Principal: Caradvisor</title>
         <meta charset="UTF-8">
@@ -22,276 +18,277 @@
             <!-- Custom styles for this template -->
         <link href="@routes.Assets.at("css/signin.css")" rel="stylesheet">
     </head>
-    <body background="../assets/wallpaperweb.jpg" style="background-size: auto">
+    <body background="../assets/wallpaperweb.jpg" style="background-size : auto">
 
-        <div id="header" style="margin-bottom : 10%"></div>
+        @header()
 
-        <div class="container">
-        <div class="row">
-            <div class="container col-md-6">
-        @if(id==1) {
+        <div class="container" style="margin-top : 5%">
+            <div class="row">
+                <div class="container col-md-6">
+                @if(id == 1) {
 
-            <div class="panel panel-danger">
-                <div class="panel-heading">Lista de vehiculos registrados</div>
-                <div class="panel-body">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Lista de vehiculos registrados</div>
+                        <div class="panel-body">
 
-                    <table class="table table-bordered">
+                            <table class="table table-bordered">
 
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Marca</th>
-                                <th>Modelo</th>
-                                <th>A&ntilde;o</th>
-                                <th>Color</th>
-                                <th>KM</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-
-
-                        <tbody>
-
-                    @for(vehiculo <- vehiculos) {
-                        <tr>
-                            <form method="post" action="@routes.Application.BusquedaRapida()">
-                            <input type="hidden" name="kilometraje" value="@vehiculo.getKilometraje" />
-                            <input type="hidden" name="marca" value="@vehiculo.getMarca" />
-                            <input type="hidden" name="modelo" value="@vehiculo.getModelo" />
-                        <th>@vehiculo.getContador</th>
-                        <td>@vehiculo.getMarca</td>
-                        <td>@vehiculo.getModelo</td>
-                        <td>@vehiculo.getYear</td>
-                        <td>@vehiculo.getColor</td>
-                        <td>@vehiculo.getKilometraje</td>
-                        <td>
-                            <button type="submit" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-chevron-right"
-                            aria-hidden="true"></span>
-                        </button>
-                        </td>
-                        </form>
-                        </tr>
-                    }
-                        </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>A&ntilde;o</th>
+                                        <th>Color</th>
+                                        <th>KM</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
 
 
-                    </table>
-                        <p>
-                        <button type="button" class="btn btn-danger" style="margin-top : 1%"
-                        data-toggle="modal" data-target="#myModal">
-                            Agregar Vehiculo</button>
-                        </p>
+                                <tbody>
+
+                                @for(vehiculo <- vehiculos) {
+                                    <tr>
+                                        <form method="post" action="@routes.Application.BusquedaRapida()">
+                                            <input type="hidden" name="kilometraje" value="@vehiculo.getKilometraje" />
+                                            <input type="hidden" name="marca" value="@vehiculo.getMarca" />
+                                            <input type="hidden" name="modelo" value="@vehiculo.getModelo" />
+                                            <th>@vehiculo.getContador</th>
+                                            <td>@vehiculo.getMarca</td>
+                                            <td>@vehiculo.getModelo</td>
+                                            <td>@vehiculo.getYear</td>
+                                            <td>@vehiculo.getColor</td>
+                                            <td>@vehiculo.getKilometraje</td>
+                                            <td>
+                                                <button type="submit" class="btn btn-danger">
+                                                    <span class="glyphicon glyphicon-chevron-right"
+                                                    aria-hidden="true"></span>
+                                                </button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                }
+                                </tbody>
+
+
+                            </table>
+                            <p>
+                                <button type="button" class="btn btn-danger" style="margin-top : 1 %"
+                                data-toggle="modal" data-target="#myModal">
+                                    Agregar Vehiculo</button>
+                            </p>
+                        </div>
+                    </div>
+
+                } else {
+
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">Lista de vehiculos registrados</div>
+                        <div class="panel-body">
+                            No cuenta con vehiculos registrados
+                            <p>
+                                <button type="button" class="btn btn-danger" style="margin-top : 1 %"
+                                data-toggle="modal" data-target="#myModal">
+                                    Agregar Vehiculo</button>
+                            </p>
+                        </div>
+                    </div>
+
+                }
                 </div>
-            </div>
+                <div class="container col-md-6">
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">Ranking Top 4</div>
+                        <div class="panel-body">
 
-        }else{
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Distribuidores</th>
+                                        <th>Talleres</th>
+                                        <th>Mecanicos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @for(i <- 0 to 3) {
+                                    <tr>
+                                        <td>@disTop.get(i).getNombre</td>
+                                        <td>@tapTop.get(i).getNombre</td>
+                                        <td>@mecTop.get(i).getNombre</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
 
-            <div class="panel  panel-danger">
-                <div class="panel-heading">Lista de vehiculos registrados</div>
-                <div class="panel-body">
-                    No cuenta con vehiculos registrados
-                    <p>
-                    <button  type="button" class="btn btn-danger" style="margin-top: 1%"
-                    data-toggle="modal" data-target="#myModal">
-                        Agregar Vehiculo</button>
-                    </p>
-                </div>
-            </div>
-
-        }
-            </div>
-            <div class="container col-md-6">
-                <div class="panel  panel-danger">
-                    <div class="panel-heading">Ranking Top 4</div>
-                    <div class="panel-body">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Distribuidores</th>
-                                    <th>Talleres</th>
-                                    <th>Mecanicos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @for(i <- 0 to 3) {
-                                <tr>
-                                    <td>@disTop.get(i).getNombre</td>
-                                    <td>@tapTop.get(i).getNombre</td>
-                                    <td>@mecTop.get(i).getNombre</td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="container col-md-6">
-                <div class="panel  panel-danger">
-                    <div class="panel-heading">Busqueda Rapida</div>
-                    <div class="panel-body">
+            <div class="row">
+                <div class="container col-md-6">
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">Busqueda Rapida</div>
+                        <div class="panel-body">
 
-                        <form id="formulario" method="POST"
-                        action="@routes.Application.BusquedaRapida()">
+                            <form id="formulario" method="POST"
+                            action="@routes.Application.BusquedaRapida()">
 
-                        <div class="container col-md-4">
-                                <p>Kilometraje</p>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon" id="sizing-addon3">KM</span>
+                                <div class="container col-md-4">
+                                    <p>Kilometraje</p>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon" id="sizing-addon3">KM</span>
                                         <input type="text" class="form-control" placeholder="Kilometraje"
                                         aria-describedby="sizing-addon3" name="kilometraje">
+                                    </div>
                                 </div>
-                        </div>
-                        <div class="container col-md-4">
-                            <div class="form-group">
-                                <label for="marca">Marca</label>
-                                <select id="marca" name="marca" class="form-control">
+                                <div class="container col-md-4">
+                                    <div class="form-group">
+                                        <label for="marca">Marca</label>
+                                        <select id="marca" name="marca" class="form-control">
 
-                                    <option>Mazda</option>
-                                    <option>Toyota</option>
-                                    <option>Suzuki</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="container col-md-4">
-                            <div class="form-group">
-                                <label for="sel1">Modelo</label>
-                                <select id="modelo" class="form-control" name="modelo">
-                                    <option>Mazda 3</option>
-                                    <option>Mazda 6</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Buscar</button>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="container col-md-6">
-                <div class="panel  panel-danger">
-                    <div class="panel-heading">Busqueda por Repuesto</div>
-                    <div class="panel-body">
-                        <form id="formulario" method="POST"
-                        action="@routes.Application.BusquedaRepuesto()">
-
-
-                        <div class="container col-md-4">
-                            <div class="form-group">
-                                <label for="sel1">Marca</label>
-                                <select class="form-control" id="sel1">
-                                    <option>Mazda</option>
-                                    <option>Toyota</option>
-                                    <option>Susuki</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="container col-md-4">
-                            <div class="form-group">
-                                <label for="sel1">Tipo de Repuesto</label>
-                                <select class="form-control" id="trepuesto" name="trepuesto">
-                                    <option>Sistema</option>
-                                    <option>Producto de Consumo</option>
-                                    <option>Accesorios</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="container col-md-4">
-                            <div class="form-group">
-                                <label for="sel1">Repuesto</label>
-                                <select class="form-control" id="repuesto" name="repuesto">
-                                    <option>Inyeccion</option>
-                                    <option>Suspension</option>
-                                    <option>Trasmision</option>
-                                    <option>Embrague</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Buscar</button>
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="footer" id="footer"></div>
-
-            <!-- Modal -->
-
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Agregar Vehiculo</h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <form class="form-horizontal" method="POST"
-                        action="@routes.Application.AgregarVehiculo()">
-                            <fieldset>
-
-                                <div class="form-group">
-                                    <label for="select" class="col-lg-2 control-label">Marca</label>
-                                    <div class="col-lg-10">
-                                        <select id="marcaM" class="form-control"
-                                        id="select" name="marcaM">
                                             <option>Mazda</option>
                                             <option>Toyota</option>
                                             <option>Suzuki</option>
                                         </select>
-                                        <br>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="select" class="col-lg-2 control-label">Modelo</label>
-                                    <div class="col-lg-10">
-                                        <select id="modeloM" class="form-control" name="modeloM">
+                                <div class="container col-md-4">
+                                    <div class="form-group">
+                                        <label for="sel1">Modelo</label>
+                                        <select id="modelo" class="form-control" name="modelo">
                                             <option>Mazda 3</option>
                                             <option>Mazda 6</option>
                                         </select>
-                                        <br>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-danger">Buscar</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="container col-md-6">
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">Busqueda por Repuesto</div>
+                        <div class="panel-body">
+                            <form id="formulario" method="POST"
+                            action="@routes.Application.BusquedaRepuesto()">
+
+
+                                <div class="container col-md-4">
+                                    <div class="form-group">
+                                        <label for="marcabr">Marca</label>
+                                        <select class="form-control" id="marcabr" name="marcabr">
+                                            <option>Mazda</option>
+                                            <option>Toyota</option>
+                                            <option>Susuki</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="inputYear" class="col-lg-2 control-label">Year</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="inputYear"
-                                        placeholder="Year" name="year">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputColor" class="col-lg-2 control-label">Color</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="inputColor"
-                                        placeholder="Color" name="color">
+                                <div class="container col-md-4">
+                                    <div class="form-group">
+                                        <label for="sel1">Tipo de Repuesto</label>
+                                        <select class="form-control" id="trepuesto" name="trepuesto">
+                                            <option>Sistema</option>
+                                            <option>Producto de Consumo</option>
+                                            <option>Accesorios</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="inputKM" class="col-lg-2 control-label">KM</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="inputKM"
-                                        placeholder="KM" name="km">
+
+                                <div class="container col-md-4">
+                                    <div class="form-group">
+                                        <label for="sel1">Repuesto</label>
+                                        <select class="form-control" id="repuesto" name="repuesto">
+                                            <option>Inyeccion</option>
+                                            <option>Suspension</option>
+                                            <option>Trasmision</option>
+                                            <option>Embrague</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </fieldset>
-                        <button type="submit" class="btn btn-danger">Agregar</button>
-                    </form>
+                                <button type="submit" class="btn btn-danger">Buscar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Modal -->
+
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Agregar Vehiculo</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form class="form-horizontal" method="POST"
+                            action="@routes.Application.AgregarVehiculo()">
+                                <fieldset>
+
+                                    <div class="form-group">
+                                        <label for="select" class="col-lg-2 control-label">Marca</label>
+                                        <div class="col-lg-10">
+                                            <select id="marcaM" class="form-control"
+                                            id="select" name="marcaM">
+                                                <option>Mazda</option>
+                                                <option>Toyota</option>
+                                                <option>Suzuki</option>
+                                            </select>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="select" class="col-lg-2 control-label">Modelo</label>
+                                        <div class="col-lg-10">
+                                            <select id="modeloM" class="form-control" name="modeloM">
+                                                <option>Mazda 3</option>
+                                                <option>Mazda 6</option>
+                                            </select>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputYear" class="col-lg-2 control-label">Year</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" id="inputYear"
+                                            placeholder="Year" name="year">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputColor" class="col-lg-2 control-label">Color</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="inputColor"
+                                            placeholder="Color" name="color">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputKM" class="col-lg-2 control-label">KM</label>
+                                        <div class="col-lg-10">
+                                            <input type="number" class="form-control" id="inputKM"
+                                            placeholder="KM" name="km">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <button type="submit" class="btn btn-danger">Agregar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
+
+        @footer()
 
             <!-- Placed at the end of the document so the pages load faster -->
         <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
@@ -303,15 +300,7 @@
 
         <script>
 
-          var link = document.getElementById('pie');
-          var template = link.import.querySelector('template');
-          var clone = document.importNode(template.content, true);
-          document.querySelector('#footer').appendChild(clone);
 
-          var link2 = document.getElementById('cabeza');
-          var template2 = link2.import.querySelector('template');
-          var clone2 = document.importNode(template2.content, true);
-          document.querySelector('#header').appendChild(clone2);
 
           $(function () {
             var $marca = $("#marca"),
@@ -319,7 +308,7 @@
                 $marcaM = $("#marcaM"),
                 $modeloM = $("#modeloM"),
                 $trepuesto = $("#trepuesto"),
-                $repuesto = $("#repuesto")
+                $repuesto = $("#repuesto");
 
             $marca.on('change', function (e) {
                 var x = $marca.val(),
@@ -388,7 +377,6 @@
           });
 
         </script>
-
 
 
     </body>

@@ -30,6 +30,10 @@ public class User {
         this.password = password;
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public String getID_Usuario_foro() {
         return ID_Usuario_foro;
     }

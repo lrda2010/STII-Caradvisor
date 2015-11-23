@@ -18,7 +18,7 @@ public class Application extends Controller {
     static DAOUser db = new DAOUser();
 
     public static Result principal() {
-        return ok(login.render(0));
+        return ok(login.render(0,1));
     }
 
     public static Result pie() {
@@ -57,7 +57,7 @@ public class Application extends Controller {
             }
 
         }else{
-            return ok(login.render(1));
+            return ok(login.render(1,1));
         }
 
     }
@@ -65,7 +65,7 @@ public class Application extends Controller {
     public static Result LogOut(){
         session().clear();
         Cache.remove("user");
-        return ok(login.render(0));
+        return ok(login.render(0,1));
     }
 
     public static Result BusquedaRapida(){
@@ -91,10 +91,10 @@ public class Application extends Controller {
     public static Result BusquedaRepuesto(){
 
         DynamicForm requestData = Form.form().bindFromRequest();
-        String marca = requestData.get("marca");
-        String trepuesto = requestData.get("trepuesto");
+        String marca = requestData.get("marcabr");
+        String repuesto = requestData.get("repuesto");
         Integer id = db.devolverIdRepuesto(marca);
-        List<Repuesto> repuestos = db.devolverRepuestos(id, trepuesto);
+        List<Repuesto> repuestos = db.devolverRepuestos(id, repuesto);
 
         return ok(busquedarepuesto.render(marca, repuestos));
     }
@@ -120,6 +120,43 @@ public class Application extends Controller {
         return ok(intro.render(1, veh,disTop,talTop,mecTop));
 
     }
+
+    public static Result RegistrarUsuario(){
+
+        DynamicForm requestData = Form.form().bindFromRequest();
+        String valor_perfil = null;
+        String username = requestData.get("inputuser");
+        String password = requestData.get("password");
+        String nombre = requestData.get("inputNombre");
+        String apellido = requestData.get("inputApellido");
+        String DNI = requestData.get("inputDNI");
+        String direccion = requestData.get("inputDireccion");
+        int telefono = Integer.parseInt(requestData.get("number"));
+        String email = requestData.get("email");
+        String perfil = requestData.get("perfil");
+
+        switch (perfil) {
+            case "Usuario":
+                valor_perfil = "USR";
+                break;
+            case "Taller":
+                valor_perfil = "TAL";
+                break;
+            case "Mecanico":
+                valor_perfil = "MEC";
+                break;
+            case "Distribuidor":
+                valor_perfil = "DIS";
+                break;
+        }
+
+
+        db.RegistrarUsuario(new User_Prop(username,nombre,apellido,DNI,direccion,telefono),new User(username,username,password,
+                DNI,email,valor_perfil,username));
+
+        return ok(login.render(0,0));
+    }
+
 
     }
 

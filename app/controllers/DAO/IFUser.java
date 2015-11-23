@@ -21,6 +21,7 @@ public interface IFUser {
     void AgregarVehiculo(Vehiculo_Usuario veh);
     Integer devolverIdRepuesto(String marca);
     List<Repuesto> devolverRepuestos(Integer id, String trepuesto);
+    void RegistrarUsuario(User_Prop propietario, User usuario);
 
 }
 
