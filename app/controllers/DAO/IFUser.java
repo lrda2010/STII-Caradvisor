@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by Administrador on 22/06/2015.
  */
+
 public interface IFUser {
 
     Connection getConnection();
@@ -22,6 +23,7 @@ public interface IFUser {
     Integer devolverIdRepuesto(String marca);
     List<Repuesto> devolverRepuestos(Integer id, String trepuesto);
     void RegistrarUsuario(User_Prop propietario, User usuario);
+    Proveedor devolverProveedor(String id);
 
 }
 

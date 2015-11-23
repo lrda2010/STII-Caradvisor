@@ -153,7 +153,7 @@ public class DAOUser implements IFUser {
             while (rs.next()) {
 
                 Proveedor proveedor = new Proveedor(
-                        rs.getInt(1),
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -206,7 +206,7 @@ public class DAOUser implements IFUser {
             while (rs.next()) {
 
                 Proveedor proveedor = new Proveedor(
-                        rs.getInt(1),
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -259,7 +259,7 @@ public class DAOUser implements IFUser {
             while (rs.next()) {
 
                 Proveedor proveedor = new Proveedor(
-                        rs.getInt(1),
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -430,8 +430,8 @@ public class DAOUser implements IFUser {
             String sql = "SELECT id FROM vehiculo_generico WHERE marca=? LIMIT 0,1";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, marca);
-
             rs = pstmt.executeQuery();
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -567,6 +567,61 @@ public class DAOUser implements IFUser {
         }
 
 
+
+    }
+
+    @Override
+    public Proveedor devolverProveedor(String id) {
+
+        Connection con = getConnection();
+        Proveedor resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM proveedores WHERE ID_Proveedor=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+               Proveedor pro = new Proveedor(
+                       rs.getString(1),
+                       rs.getString(2),
+                       rs.getString(3),
+                       rs.getString(4),
+                       rs.getString(5),
+                       rs.getString(6),
+                       rs.getString(7),
+                       rs.getInt(8)
+               ) ;
+
+                resultado = pro;
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
 
     }
 

@@ -9,13 +9,16 @@ POST        /busqueda            controllers.Application.BusquedaRapida()
 POST        /repuesto            controllers.Application.BusquedaRepuesto()
 POST        /agregar             controllers.Application.AgregarVehiculo()
 POST        /registrar           controllers.Application.RegistrarUsuario()
+POST        /menu                controllers.Application.RetrocederMenu()
+GET        /logout               controllers.Application.LogOut()
+GET        /proveedor/:id        controllers.Application.Proveedor(id: String)
 
 
 #Templates
+GET         /header              controllers.Application.cabecera()
 GET         /header              controllers.Application.cabecera()
 GET         /footer              controllers.Application.pie()
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
-    

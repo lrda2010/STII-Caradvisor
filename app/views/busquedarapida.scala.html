@@ -21,7 +21,7 @@
 
         @header()
 
-        ssssss
+
         <div class="container" style="margin-top : 5%">
 
             <div class="panel panel-danger">
@@ -57,6 +57,8 @@
         </div>
 
         <div class="container">
+            <form action="@routes.Application.BusquedaRepuesto()" method="post">
+                <input type="hidden" name="marcabr" id="marcabr" value="@marca">
             <div class="panel  panel-danger">
                 <div class="panel-heading">Busqueda por Repuesto</div>
                 <div class="panel-body">
@@ -64,7 +66,7 @@
                     <div class="container col-md-6">
                         <div class="form-group">
                             <label for="sel1">Tipo de Repuesto</label>
-                            <select class="form-control" id="sel1">
+                            <select class="form-control" id="trepuesto" name="trepuesto">
                                 <option>Sistema</option>
                                 <option>Producto de Consumo</option>
                                 <option>Accesorios</option>
@@ -76,14 +78,11 @@
                     <div class="container col-md-6">
                         <div class="form-group">
                             <label for="sel1">Repuesto</label>
-                            <select class="form-control" id="sel1">
-                                <option>Aditivos</option>
-                                <option>Refrigerantes</option>
-                                <option>Lubricantes</option>
-                                <option>Baterias</option>
-                                <option>Iluminacion</option>
-                                <option>Audio</option>
-                                <option>Carroceria</option>
+                            <select class="form-control" id="repuesto" name="repuesto">
+                                <option>Inyeccion</option>
+                                <option>Suspension</option>
+                                <option>Trasmision</option>
+                                <option>Embrague</option>
                             </select>
                         </div>
                     </div>
@@ -92,19 +91,62 @@
                     </div>
                 </div>
             </div>
+                </form>
         </div>
 
+        @retroceder()
 
         @footer()
 
 
             <!-- Bootstrap core JavaScript
    ================================================== -->
-
-
             <!-- Placed at the end of the document so the pages load faster -->
         <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
         <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+
+
+            <script>
+
+          $(function () {
+            var $trepuesto = $("#trepuesto"),
+                $repuesto = $("#repuesto");
+
+                $trepuesto.on('change', function (e) {
+                var x = $trepuesto.val(),
+                    list;
+                switch (x) {
+                    case "Sistema":
+                        list = ["Inyeccion", "Suspension", "Trasmision", "Embrague"];
+                        break;
+                    case "Producto de Consumo":
+                        list = ["Aditivos", "Lubricantes", "Iluminacion", "Baterias", "Frenos"];
+                        break;
+                    case "Accesorios":
+                        list = ["Carroceria", "Audio"];
+                        break;
+                }
+                $repuesto.html(compact.options(list));
+            });
+
+
+
+            var compact = {
+                options: function (list) {
+                    var str = "";
+                    for (opt in list) {
+                        str += "<option>" + list[opt] + "</option>"
+                    }
+                    return str;
+                }
+            }
+          });
+
+
+
+            </script>
+
+
 
     </body>
 </html>

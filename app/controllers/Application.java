@@ -157,6 +157,26 @@ public class Application extends Controller {
         return ok(login.render(0,0));
     }
 
+    public static Result RetrocederMenu(){
+
+        List<Vehiculo_Usuario> veh = db.listaVehiculos((User) Cache.get("user"));
+        List<Proveedor> disTop = db.listaDistribuidoresTop();
+        List<Proveedor> talTop = db.listaTalleresTop();
+        List<Proveedor> mecTop = db.listaMecanicosTop();
+
+        if(veh.isEmpty()){
+            return ok(intro.render(0, null,disTop,talTop,mecTop));}
+        else{
+            return ok(intro.render(1, veh,disTop,talTop,mecTop));
+        }
+
+    }
+
+    public static Result Proveedor(String id){
+
+        Proveedor pro = db.devolverProveedor(id);
+        return ok(proveedor.render(pro));
+    }
 
     }
 

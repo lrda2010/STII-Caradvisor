@@ -5,7 +5,7 @@ package models;
  */
 public class Proveedor {
 
-    private int id;
+    private String id;
     private String tipo;
     private String nombre;
     private String servicio;
@@ -14,7 +14,7 @@ public class Proveedor {
     private String web;
     private int puntaje;
 
-    public Proveedor(int id, String tipo, String nombre, String servicio, String direccion, String telefono, String web, int puntaje) {
+    public Proveedor(String id, String tipo, String nombre, String servicio, String direccion, String telefono, String web, int puntaje) {
         this.id = id;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -25,11 +25,11 @@ public class Proveedor {
         this.puntaje = puntaje;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

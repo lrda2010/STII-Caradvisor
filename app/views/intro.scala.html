@@ -113,9 +113,18 @@
                                 <tbody>
                                 @for(i <- 0 to 3) {
                                     <tr>
-                                        <td>@disTop.get(i).getNombre</td>
-                                        <td>@tapTop.get(i).getNombre</td>
-                                        <td>@mecTop.get(i).getNombre</td>
+                                        <td>
+                                            <a href="@routes.Application.Proveedor(disTop.get(i).getId)">
+                                        @disTop.get(i).getNombre</a>
+                                        </td>
+                                        <td>
+                                            <a  href="@routes.Application.Proveedor(tapTop.get(i).getId)">
+                                            @tapTop.get(i).getNombre</a>
+                                        </td>
+                                        <td>
+                                            <a  href="@routes.Application.Proveedor(mecTop.get(i).getId)">
+                                            @mecTop.get(i).getNombre</a>
+                                        </td>
                                     </tr>
                                 }
                                 </tbody>
@@ -183,7 +192,7 @@
                                         <select class="form-control" id="marcabr" name="marcabr">
                                             <option>Mazda</option>
                                             <option>Toyota</option>
-                                            <option>Susuki</option>
+                                            <option>Suzuki</option>
                                         </select>
                                     </div>
                                 </div>
