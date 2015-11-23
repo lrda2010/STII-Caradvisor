@@ -15,8 +15,7 @@ GET        /proveedor/:id        controllers.Application.Proveedor(id: String)
 
 
 #Templates
-GET         /header              controllers.Application.cabecera()
-GET         /header              controllers.Application.cabecera()
+GET         /cabecera            controllers.Application.cabecera()
 GET         /footer              controllers.Application.pie()
 
 # Map static resources from the /public folder to the /assets URL path

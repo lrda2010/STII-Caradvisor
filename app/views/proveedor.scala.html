@@ -1,4 +1,4 @@
-@(prov: Proveedor)
+@(prov: Proveedor, cad: String)
 
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
     </head>
     <body background="../assets/wallpaperweb.jpg" style="background-size : auto">
 
-        @header()
+        @cabecera()
 
 
     <div class="container" style="margin-top : 5%">
@@ -25,7 +25,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Proveedor: @prov.getNombre</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body col-md-6">
                 <div class="row">
                     <div style="margin-bottom: 2%">
                         <p>
@@ -49,6 +49,10 @@
                     </div>
                 </div>
             </div>
+            <div class="panel-body col-md-6">
+                <img class="img-responsive" src="@cad">
+            </div>
+
         </div>
         </div>
 

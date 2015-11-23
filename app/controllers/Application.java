@@ -26,7 +26,7 @@ public class Application extends Controller {
     }
 
     public static Result cabecera() {
-        return ok(header.render());
+        return ok(cabecera.render());
     }
 
 
@@ -175,7 +175,8 @@ public class Application extends Controller {
     public static Result Proveedor(String id){
 
         Proveedor pro = db.devolverProveedor(id);
-        return ok(proveedor.render(pro));
+        String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
+        return ok(proveedor.render(pro, cad));
     }
 
     }
