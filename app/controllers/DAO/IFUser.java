@@ -24,6 +24,7 @@ public interface IFUser {
     List<Repuesto> devolverRepuestos(Integer id, String trepuesto);
     void RegistrarUsuario(User_Prop propietario, User usuario);
     Proveedor devolverProveedor(String id);
+    void AgregarCalificacion(Calificacion cal);
 
 }
 

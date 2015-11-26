@@ -189,9 +189,24 @@ public class Application extends Controller {
 
     public static Result CategorizarOK(){
 
+        DynamicForm requestData = Form.form().bindFromRequest();
+
+        String comentario = requestData.get("comment");
+        int calificacion = Integer.parseInt(requestData.get("calificacionG"));
+        int precio = Integer.parseInt(requestData.get("precio"));
+        int calidad = Integer.parseInt(requestData.get("calidad"));
+        int ubicacion = Integer.parseInt(requestData.get("ubicacion"));
+        int elaboral = Integer.parseInt(requestData.get("elaboral"));
+        int nrepuesto = Integer.parseInt(requestData.get("nrepuesto"));
+
+       db.AgregarCalificacion(new Calificacion(
+           comentario,calificacion,calidad,ubicacion,precio,elaboral,nrepuesto,
+                       session().get("id_prov"),session().get("user")));
+
         Proveedor pro = db.devolverProveedor(session().get("id_prov"));
         String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
-        return ok(proveedor.render(pro,cad));
+
+        return ok(proveedor.render(pro, cad));
     }
 
     }

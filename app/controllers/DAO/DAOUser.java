@@ -625,4 +625,102 @@ public class DAOUser implements IFUser {
 
     }
 
+    @Override
+    public void AgregarCalificacion(Calificacion cal) {
+
+        Connection con = getConnection();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        int puntaje_base = 0;
+        int cuenta = 0;
+
+
+        try {
+            String sql = "INSERT INTO calificacion " +
+                    "(comentario,calificacionG,calidad,Ubicacion,EquipoL,NivelR," +
+                    " fk_proveedor, fk_usuario) " +
+                    "VALUES (?,?,?,?,?,?,?,?)";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, cal.getId());
+            pstmt.setInt(2, cal.getCalificacionG());
+            pstmt.setInt(3, cal.getCalidad());
+            pstmt.setInt(4, cal.getUbicacion());
+            pstmt.setInt(5, cal.getEquipoL());
+            pstmt.setInt(6, cal.getNivelR());
+            pstmt.setString(7, cal.getFk_proveedor());
+            pstmt.setString(8, cal.getFk_usuario());
+
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //Calcular Puntaje Nuevo//
+
+        try {
+            String sql = "SELECT PUNTAJE FROM proveedores WHERE ID_Proveedor=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, cal.getFk_proveedor());
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+                while (rs.next()) {
+                  puntaje_base = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+        try {
+            String sql = "SELECT COUNT(*) FROM calificacion where fk_proveedor=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, cal.getFk_proveedor());
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+                cuenta = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            String sql = "UPDATE proveedores SET PUNTAJE=? WHERE ID_Proveedor =?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, ((puntaje_base+cal.getCalificacionG())/(cuenta+1)));
+            pstmt.setString(2, cal.getFk_proveedor());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
