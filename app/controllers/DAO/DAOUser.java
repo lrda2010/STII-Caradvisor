@@ -63,6 +63,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
 
         } catch (SQLException e) {
@@ -119,6 +120,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
 
         } catch (SQLException e) {
@@ -173,6 +175,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
 
         } catch (SQLException e) {
@@ -226,6 +229,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
 
         } catch (SQLException e) {
@@ -279,6 +283,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
 
         } catch (SQLException e) {
@@ -321,6 +326,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -371,6 +377,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -409,6 +416,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -500,6 +508,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -561,6 +570,7 @@ public class DAOUser implements IFUser {
 
 
         try {
+            pstmt.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -614,6 +624,7 @@ public class DAOUser implements IFUser {
         }
 
         try {
+            pstmt.close();
             con.close();
 
         } catch (SQLException e) {
@@ -706,6 +717,7 @@ public class DAOUser implements IFUser {
 
 
             try {
+                pstmt.close();
                 con.close();
 
             } catch (SQLException e) {
@@ -819,6 +831,101 @@ public class DAOUser implements IFUser {
 
         return resultado;
     }
+
+    @Override
+    public List<Integer> devolverCodigosRepuestos(String id) {
+
+        Connection con = getConnection();
+        User_Prop resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        ArrayList<Integer> codigos = new ArrayList<>();
+
+        try {
+            String sql = "SELECT rep_id FROM prov_rep_mix  WHERE prov_id=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+                codigos.add(rs.getInt(1));
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return codigos;
+    }
+
+    @Override
+    public Repuesto devolverRepuesto(int id) {
+
+        Connection con = getConnection();
+        Repuesto resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM repuesto  WHERE idrepuesto=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+                Repuesto rep = new Repuesto(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6)
+                );
+
+                resultado = rep;
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
+    }
+
 }
 
 

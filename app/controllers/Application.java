@@ -11,6 +11,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application extends Controller {
@@ -180,6 +181,7 @@ public class Application extends Controller {
         String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
         List<Calificacion> calificaciones = db.mostrarCalificaciones(pro.getId());
         User_Prop usuario_comentario;
+        List<Repuesto> repuestos = new ArrayList<>();
 
         for (Calificacion calificacion : calificaciones) {
 
@@ -188,12 +190,18 @@ public class Application extends Controller {
             calificacion.setNombre_usuario(usuario_comentario.getNombre());
         }
 
+        List<Integer> codigos = db.devolverCodigosRepuestos(id);
+
+        for (Integer codigo : codigos) {
+            Repuesto r = db.devolverRepuesto(codigo);
+            repuestos.add(r);
+        }
 
         if(calificaciones.isEmpty()){
-            return ok(proveedor.render(pro,cad,null));
+            return ok(proveedor.render(pro,cad,null, repuestos));
         }
         else{
-            return ok(proveedor.render(pro,cad,calificaciones));
+            return ok(proveedor.render(pro,cad,calificaciones, repuestos));
         }
     }
 
@@ -223,20 +231,29 @@ public class Application extends Controller {
         String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
         List<Calificacion> calificaciones = db.mostrarCalificaciones(pro.getId());
         User_Prop usuario_comentario;
+        List<Repuesto> repuestos = new ArrayList<>();
 
         for (Calificacion calificacionX : calificaciones) {
-
             String usuarioco = calificacionX.getFk_usuario();
             usuario_comentario = db.devolverPropietario(usuarioco);
             calificacionX.setNombre_usuario(usuario_comentario.getNombre());
         }
 
+        List<Integer> codigos = db.devolverCodigosRepuestos(
+                session().get("id_prov")
+        );
+
+        for (Integer codigo : codigos) {
+            Repuesto r = db.devolverRepuesto(codigo);
+            repuestos.add(r);
+        }
+
 
         if(calificaciones.isEmpty(  )){
-            return ok(proveedor.render(pro,cad,null));
+            return ok(proveedor.render(pro,cad,null, repuestos));
         }
         else{
-            return ok(proveedor.render(pro,cad,calificaciones));
+            return ok(proveedor.render(pro,cad,calificaciones, repuestos));
         }
      }
 
