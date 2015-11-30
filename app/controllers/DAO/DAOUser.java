@@ -926,6 +926,49 @@ public class DAOUser implements IFUser {
         return resultado;
     }
 
+    @Override
+    public List<String> devolverCodigosProveedores(int id) {
+
+        Connection con = getConnection();
+        User_Prop resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        ArrayList<String> codigos = new ArrayList<>();
+
+        try {
+            String sql = "SELECT prov_id FROM prov_rep_mix  WHERE prov_id=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+                codigos.add(rs.getString(1));
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return codigos;
+    }
+
+
+
 }
 
 

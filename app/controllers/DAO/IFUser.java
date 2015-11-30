@@ -3,6 +3,7 @@ package controllers.DAO;
 import models.*;
 import scala.Int;
 
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.util.List;
 
@@ -30,11 +31,14 @@ public interface IFUser {
     List<Repuesto> devolverRepuestos(Integer id, String trepuesto);
 
 
-    Proveedor devolverProveedor(String id);
     List<Calificacion> mostrarCalificaciones(String fk_proveedor);
     User_Prop devolverPropietario(String id);
     List<Integer> devolverCodigosRepuestos(String id);
     Repuesto devolverRepuesto(int id);
+
+    List<String> devolverCodigosProveedores(int id);
+    Proveedor devolverProveedor(String id);
+
 
 }
 

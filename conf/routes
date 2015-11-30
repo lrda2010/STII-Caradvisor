@@ -3,17 +3,18 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.principal()
-POST        /                    controllers.Application.ValidaciondeUsuario()
-POST        /busqueda            controllers.Application.BusquedaRapida()
-POST        /repuesto            controllers.Application.BusquedaRepuesto()
-POST        /agregar             controllers.Application.AgregarVehiculo()
-POST        /registrar           controllers.Application.RegistrarUsuario()
-POST        /menu                controllers.Application.RetrocederMenu()
-GET         /logout               controllers.Application.LogOut()
-GET         /proveedor/:id        controllers.Application.Proveedor(id: String)
-POST        /categorizar/        controllers.Application.Categorizar()
+GET         /                      controllers.Application.principal()
+POST        /                      controllers.Application.ValidaciondeUsuario()
+POST        /busqueda              controllers.Application.BusquedaRapida()
+POST        /repuesto              controllers.Application.BusquedaRepuesto()
+POST        /agregar               controllers.Application.AgregarVehiculo()
+POST        /registrar             controllers.Application.RegistrarUsuario()
+POST        /menu                  controllers.Application.RetrocederMenu()
+GET         /logout                controllers.Application.LogOut()
+GET         /proveedor/:id         controllers.Application.Proveedor(id: String)
+POST        /categorizar/          controllers.Application.Categorizar()
 POST        /categorizarOK/        controllers.Application.CategorizarOK()
+POST         /listaProveedor/    controllers.Application.DevolverProveedores()
 
 
 #Templates

@@ -248,14 +248,30 @@ public class Application extends Controller {
             repuestos.add(r);
         }
 
-
         if(calificaciones.isEmpty(  )){
             return ok(proveedor.render(pro,cad,null, repuestos));
         }
         else{
             return ok(proveedor.render(pro,cad,calificaciones, repuestos));
         }
-     }
+
+    }
+
+    public static  Result DevolverProveedores(){
+
+        DynamicForm requestData = Form.form().bindFromRequest();
+        int repuesto = Integer.parseInt(requestData.get("repuesto"));
+        List<Proveedor> proveedores = new ArrayList<>();
+        List<String> codigos = db.devolverCodigosProveedores(repuesto);
+
+        for (String codigo : codigos) {
+            Proveedor p = db.devolverProveedor(codigo);
+            proveedores.add(p);
+        }
+
+        return ok(repuestoproveedor.render(proveedores));
+
+    }
 
     }
 
