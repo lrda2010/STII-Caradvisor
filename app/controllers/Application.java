@@ -29,6 +29,7 @@ public class Application extends Controller {
         return ok(cabecera.render());
     }
 
+    
 
     //Generando el metodo de validacion de usuario
     public static Result ValidaciondeUsuario()
@@ -175,10 +176,25 @@ public class Application extends Controller {
     public static Result Proveedor(String id){
 
         session().put("id_prov",id);
-
         Proveedor pro = db.devolverProveedor(id);
         String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
-        return ok(proveedor.render(pro, cad));
+        List<Calificacion> calificaciones = db.mostrarCalificaciones(pro.getId());
+        User_Prop usuario_comentario;
+
+        for (Calificacion calificacion : calificaciones) {
+
+            String usuarioco = calificacion.getFk_usuario();
+            usuario_comentario = db.devolverPropietario(usuarioco);
+            calificacion.setNombre_usuario(usuario_comentario.getNombre());
+        }
+
+
+        if(calificaciones.isEmpty()){
+            return ok(proveedor.render(pro,cad,null));
+        }
+        else{
+            return ok(proveedor.render(pro,cad,calificaciones));
+        }
     }
 
     public static Result Categorizar(){
@@ -205,9 +221,24 @@ public class Application extends Controller {
 
         Proveedor pro = db.devolverProveedor(session().get("id_prov"));
         String cad = "../assets/proveedores/" + pro.getId() + ".jpg";
+        List<Calificacion> calificaciones = db.mostrarCalificaciones(pro.getId());
+        User_Prop usuario_comentario;
 
-        return ok(proveedor.render(pro, cad));
-    }
+        for (Calificacion calificacionX : calificaciones) {
+
+            String usuarioco = calificacionX.getFk_usuario();
+            usuario_comentario = db.devolverPropietario(usuarioco);
+            calificacionX.setNombre_usuario(usuario_comentario.getNombre());
+        }
+
+
+        if(calificaciones.isEmpty(  )){
+            return ok(proveedor.render(pro,cad,null));
+        }
+        else{
+            return ok(proveedor.render(pro,cad,calificaciones));
+        }
+     }
 
     }
 

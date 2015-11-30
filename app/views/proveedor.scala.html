@@ -1,4 +1,5 @@
-@(prov: Proveedor, cad: String)
+@(prov: Proveedor, cad: String ,
+        calificaciones :java.util.List[Calificacion])
 
 
 <!DOCTYPE html>
@@ -67,18 +68,46 @@
             </form>
         </div>
 
+        <div class="container">
+        <div class="panel col-md-6">
+            <div class="panel-heading">
+                <h3 class="panel-title">Lista de Calificaciones</h3>
+            </div>
+            <div class="panel-body panel-danger">
+                @if(calificaciones!=null){
+                    <div class="row" style="margin-top : 5 %">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr class="active">
+                                    <th>Usuario</th>
+                                    <th>Comentario</th>
+                                    <th>Calificacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @for(calificacion <- calificaciones) {
+                                <tr class="danger">
+                                    <td>@calificacion.getNombre_usuario</td>
+                                    <td>@calificacion.getComentario</td>
+                                    <td>@calificacion.getCalificacionG</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
 
+                    </div>
+                }else{
+                    <h3>No tiene calificaciones registradas</h3>
+                }
+            </div>
+        </div>
+    </div>
 
-
-        @retroceder()
-
+       @retroceder()
        @footer()
-
 
             <!-- Bootstrap core JavaScript
    ================================================== -->
-
-
             <!-- Placed at the end of the document so the pages load faster -->
         <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
         <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>

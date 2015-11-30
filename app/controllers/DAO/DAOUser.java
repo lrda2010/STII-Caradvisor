@@ -631,9 +631,7 @@ public class DAOUser implements IFUser {
         Connection con = getConnection();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
-        int puntaje_base = 0;
-        int cuenta = 0;
-
+        float promedio = 0;
 
         try {
             String sql = "INSERT INTO calificacion " +
@@ -643,7 +641,7 @@ public class DAOUser implements IFUser {
 
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, cal.getComentario());
-            pstmt.setInt(2, cal.getCalificacionG());
+            pstmt.setFloat(2, cal.getCalificacionG());
             pstmt.setInt(3, cal.getPrecio());
             pstmt.setInt(4,cal.getCalidad());
             pstmt.setInt(5, cal.getUbicacion());
@@ -661,9 +659,8 @@ public class DAOUser implements IFUser {
 
         //Calcular Puntaje Nuevo//
 
-        System.out.println(cal.getFk_proveedor());
-
-            String sql = "SELECT PUNTAJE FROM proveedores WHERE ID_Proveedor=?";
+            String sql = "SELECT AVG(calificacionG) FROM calificacion " +
+                    "WHERE fk_proveedor=?";
             try {
                 pstmt = con.prepareStatement(sql);
             } catch (SQLException e) {
@@ -684,28 +681,8 @@ public class DAOUser implements IFUser {
 
             try {
                 while (rs.next()) {
-                    puntaje_base = rs.getInt(1);
+                    promedio = rs.getInt(1);
 
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-
-            try {
-                String sql2 = "SELECT COUNT(*) FROM calificacion where fk_proveedor=?";
-                pstmt = con.prepareStatement(sql2);
-                pstmt.setString(1, cal.getFk_proveedor());
-
-                rs = pstmt.executeQuery();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                while (rs.next()) {
-                    cuenta = rs.getInt(1);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -716,7 +693,9 @@ public class DAOUser implements IFUser {
                 String sql3 = "UPDATE proveedores SET PUNTAJE=? WHERE ID_Proveedor =?";
 
                 pstmt = con.prepareStatement(sql3);
-                pstmt.setInt(1, ((puntaje_base + cal.getCalificacionG()) / (cuenta + 1)));
+
+                float formula = promedio;
+                pstmt.setFloat(1, formula);
                 pstmt.setString(2, cal.getFk_proveedor());
 
                 pstmt.executeUpdate();
@@ -733,8 +712,113 @@ public class DAOUser implements IFUser {
                 e.printStackTrace();
             }
 
-
         }
+
+    @Override
+    public List<Calificacion> mostrarCalificaciones(String fk_proveedor) {
+        Connection con = getConnection();
+        ArrayList<Calificacion> resultado = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM calificacion WHERE fk_proveedor=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, fk_proveedor);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+
+                Calificacion cal = new Calificacion(
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getString(10));
+
+                resultado.add(cal);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
     }
+
+    @Override
+    public User_Prop devolverPropietario(String id) {
+
+        Connection con = getConnection();
+        User_Prop resultado = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+
+        try {
+            String sql = "SELECT * FROM propietario_vehiculo  WHERE ID_Propietario=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+
+            rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs.next()) {
+
+                User_Prop pro = new User_Prop(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6)
+                );
+
+                resultado = pro;
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pstmt.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultado;
+    }
+}
 
 

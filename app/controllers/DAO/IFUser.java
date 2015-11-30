@@ -25,6 +25,8 @@ public interface IFUser {
     void RegistrarUsuario(User_Prop propietario, User usuario);
     Proveedor devolverProveedor(String id);
     void AgregarCalificacion(Calificacion cal);
+    List<Calificacion> mostrarCalificaciones(String fk_proveedor);
+    User_Prop devolverPropietario(String id);
 
 }
 

@@ -5,10 +5,9 @@ package models;
  */
 public class Calificacion {
 
-
     private int id;
     private String comentario;
-    private int calificacionG;
+    private float calificacionG;
     private int calidad;
     private int ubicacion;
     private int precio;
@@ -16,8 +15,10 @@ public class Calificacion {
     private int NivelR;
     private String fk_proveedor;
     private String fk_usuario;
+    private String nombre_usuario;
 
-    public Calificacion(String comentario, int calificacionG, int calidad, int ubicacion, int precio, int equipoL, int nivelR, String fk_proveedor, String fk_usuario) {
+
+    public Calificacion(String comentario, float calificacionG, int calidad, int ubicacion, int precio, int equipoL, int nivelR, String fk_proveedor, String fk_usuario) {
         this.comentario = comentario;
         this.calificacionG = calificacionG;
         this.calidad = calidad;
@@ -27,6 +28,23 @@ public class Calificacion {
         NivelR = nivelR;
         this.fk_proveedor = fk_proveedor;
         this.fk_usuario = fk_usuario;
+    }
+
+
+    public Calificacion(String comentario,
+                        float calificacionG, int calidad, int ubicacion, int precio,
+                        int equipoL, int nivelR, String fk_proveedor, String fk_usuario,
+                        String nombre_usuario) {
+        this.comentario = comentario;
+        this.calificacionG = calificacionG;
+        this.calidad = calidad;
+        this.ubicacion = ubicacion;
+        this.precio = precio;
+        this.equipoL = equipoL;
+        NivelR = nivelR;
+        this.fk_proveedor = fk_proveedor;
+        this.fk_usuario = fk_usuario;
+        this.nombre_usuario = nombre_usuario;
     }
 
     public int getPrecio() {
@@ -53,7 +71,7 @@ public class Calificacion {
         this.comentario = comentario;
     }
 
-    public int getCalificacionG() {
+    public float getCalificacionG() {
         return calificacionG;
     }
 
@@ -107,5 +125,17 @@ public class Calificacion {
 
     public void setFk_usuario(String fk_usuario) {
         this.fk_usuario = fk_usuario;
+    }
+
+    public void setCalificacionG(float calificacionG) {
+        this.calificacionG = calificacionG;
+    }
+
+    public String getNombre_usuario() {
+        return nombre_usuario;
+    }
+
+    public void setNombre_usuario(String nombre_usuario) {
+        this.nombre_usuario = nombre_usuario;
     }
 }

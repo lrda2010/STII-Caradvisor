@@ -12,7 +12,7 @@ public class Proveedor {
     private String direccion;
     private String telefono;
     private String web;
-    private int puntaje;
+    private float puntaje;
 
     public Proveedor(String id, String tipo, String nombre, String servicio, String direccion, String telefono, String web, int puntaje) {
         this.id = id;
@@ -81,7 +81,7 @@ public class Proveedor {
         this.web = web;
     }
 
-    public int getPuntaje() {
+    public float getPuntaje() {
         return puntaje;
     }
 
